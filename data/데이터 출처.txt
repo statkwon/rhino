@@ -1,0 +1,11 @@
+데이터출처
+
+<서울시 구별 공시지가>
+http://www.r-one.co.kr/rone/resis/statistics/statisticsViewer.do?menuId=LFR_12200
+
+<사업체 수>
+https://data.seoul.go.kr/dataList/104/S/2/datasetView.do
+
+<학교 수>
+https://kess.kedi.re.kr/mobile/search?searchTxt=%EC%84%9C%EC%9A%B8%EC%8B%9C%20%ED%96%89%EC%A0%95%EA%B5%AC%EC%97%AD%EB%B3%84%20%ED%95%99%EA%B5%90%EC%88%98
+
