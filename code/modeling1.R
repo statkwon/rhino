@@ -5,6 +5,7 @@ set.seed(519)
 gas <- read.csv("data/cleansing/total_data.csv")
 
 skimr::skim(gas)
+
 #변수명 변경
 colnames(gas) <- c('gu', 'gas_station', 'car', 'station_per_car', 'inflow', 'outflow', 'land_value', 'university',
   'enterprise', 'distributor', 'parking_area', 'school', 'road_area', 'population', 'day_pop', 'night_pop')
@@ -47,7 +48,7 @@ juice(gas_recipe) %>%
 #찐 모델링1 : Random forest
 gas_ranger <- rand_forest(trees = 100) %>%
   set_mode("regression") %>% 
-  set_engine("randomForest") # `ranger` 팩키지
+  set_engine("ranger") # `ranger` 팩키지
 # set_engine("randomForest") %>% # `randomForest` 팩키지
 
 
@@ -79,13 +80,18 @@ detach(gas_pred)
 mse1
 
 #변수중요도 확인
-library(randomForest)
-set.seed(1)
-rf.gas<-randomForest(station_per_car~.,data=gas_tbl, mtry=6, importance=TRUE)
-importance(rf.gas)
+#https://koalaverse.github.io/vip/articles/vip.html
+library(vip)
+set.seed(101)
+rfo <- ranger(station_per_car ~ ., data = train_gas, importance = "impurity")
+(vi_rfo <- rfo$variable.importance)
+barplot(vi_rfo, horiz = TRUE, las = 1)
 
 library(caret)
-gbmImp <- varImp(rf.gas, scale = FALSE)
-gbmImp
+varImp(gas_fit$fit$fit$fit, scale = FALSE)
 
+
+#모델
+glmfit=glm(station_per_car~.,data=train_gas,family=gaussian)
+summary(glmfit)
 
