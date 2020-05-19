@@ -1,6 +1,7 @@
 #modeling part1
 
 library(tidyverse)
+set.seed(519)
 gas <- read.csv("data/cleansing/total_data.csv")
 
 skimr::skim(gas)
@@ -13,8 +14,9 @@ library(tidymodels)
 gas_tbl <- gas %>% as_tibble %>% 
   janitor::clean_names()
 gas_tbl<-gas_tbl %>%
-  filter(gu != "강북구") %>% 
-  select(-gu) #구 제거 #NA있는 강북구 제거
+  filter(gu != "강북구") %>%
+  mutate(station_per_car = car/gas_station) %>% 
+  select(-c(gu, gas_station, car)) #구 제거 #NA있는 강북구 제거
 
 #split
 gas_split <- initial_split(gas_tbl, prop = 0.8)
@@ -42,10 +44,10 @@ glimpse(gas_testdata)
 juice(gas_recipe) %>% 
   head()
 
-#찐 모델링 : Random forest
+#찐 모델링1 : Random forest
 gas_ranger <- rand_forest(trees = 100) %>%
   set_mode("regression") %>% 
-  set_engine("ranger") # `ranger` 팩키지
+  set_engine("randomForest") # `ranger` 팩키지
 # set_engine("randomForest") %>% # `randomForest` 팩키지
 
 
@@ -67,5 +69,23 @@ gas_pred <- train_gas %>%
 
 head(gas_pred)
 
+#MSE 확인
 gas_pred %>% 
   select(station_per_car, .pred)
+attach(gas_pred)
+library("MLmetrics")
+mse1 <- MSE(.pred,station_per_car)
+detach(gas_pred)
+mse1
+
+#변수중요도 확인
+library(randomForest)
+set.seed(1)
+rf.gas<-randomForest(station_per_car~.,data=gas_tbl, mtry=6, importance=TRUE)
+importance(rf.gas)
+
+library(caret)
+gbmImp <- varImp(rf.gas, scale = FALSE)
+gbmImp
+
+
