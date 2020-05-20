@@ -103,3 +103,5 @@ car_gu <- car_gu %>%
 head(car_gu)  
 
 write.csv(car_gu, "data/cleansing/car_gu.csv", row.names = F)
+
+##아직 미완성
