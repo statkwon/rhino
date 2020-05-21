@@ -18,6 +18,7 @@
 
 <TIMELINE>
 금요일
+
 - 지우: prerequisite: 1번 마무리
 - 재상: 2번, 3번 준비
   
