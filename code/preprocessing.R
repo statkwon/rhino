@@ -68,7 +68,7 @@ car_gu <- car_gu %>%
   left_join(seoul_location) 
 
 #충전소 좌표 데이터를 활용, 좌표 간 거리 계산
-hyd_location <- read.csv("data/서울시_근교_충전소좌표.txt")
+hyd_location <- read.csv("data/서울시_근교_충전소좌표(정리).txt")
 
 car_gu <-car_gu %>% 
   mutate(s_yeoui = sqrt((lat - hyd_location[1,2])**2 + 
@@ -103,4 +103,21 @@ car_gu <- car_gu %>%
 head(car_gu)  
 
 
-##아직 미완성 -> 자치구별 데이터 종합할 예정
+##자치구별 인구 데이터(pop), 차량 데이터(car_gu) 결합
+
+#인구 데이터 자치구별로 정리
+str(pop)
+colnames(pop) <- c("gu", "dong", "pop", paste("X",seq(0,95, 5),seq(4,99, 5), sep = "_")
+, "X_100")
+
+pop_gu <-pop %>% 
+  group_by(gu) %>% 
+  summarise_at(vars(starts_with("X")), funs(sum))
+
+car_gu <- car_gu %>% 
+  left_join(pop_gu)
+
+head(car_gu)
+
+write.csv(car_gu, "data/cleansing/car_gu.csv", row.names = F)
+
