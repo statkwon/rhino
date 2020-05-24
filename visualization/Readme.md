@@ -12,6 +12,8 @@ https://geocompr.robinlovelace.net/adv-map.html
 
 https://kuduz.tistory.com/1196
 
+Interact with your data and create interactive plots - Shiny app의 Basic structure 
+
 2) Shiny dashboard 호스팅 방법
 
 https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하였으나 에러발생
