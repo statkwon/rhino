@@ -14,4 +14,4 @@ https://kuduz.tistory.com/1196
 
 2) Shiny dashboard 호스팅 방법
 
-https://wikidocs.net/66610
+https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하였으나 에러발생
