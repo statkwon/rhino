@@ -11,3 +11,7 @@ https://hansenjohnson.org/post/interactive-maps-in-r/
 https://geocompr.robinlovelace.net/adv-map.html
 
 https://kuduz.tistory.com/1196
+
+2) Shiny dashboard 호스팅 방법
+
+https://wikidocs.net/66610
