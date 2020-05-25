@@ -1,0 +1,21 @@
+---
+title: "Map_Style1"
+author: "Kwonsang Jung"
+output: html_document
+tango: highlight
+---
+
+```{r}
+library(ggplot2)
+library(moonBook2)
+library(kormaps2014)
+library(maps)
+library(mapproj)
+
+data = read.csv('total_data.csv')
+k_pop = korpop2[1:25,]
+k_pop[,26:40] = data[,2:16]
+
+ggChoropleth(k_pop, kormap2, fillvar='공시지가', subarea=c('서울'),
+             tooltip='행정구역별_읍면동', title = '공시지가', interactive=T)
+```
