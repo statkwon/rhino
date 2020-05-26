@@ -21,3 +21,5 @@ Interact with your data and create interactive plots - Shiny app의 Basic struct
 2) Shiny dashboard 호스팅 방법
 
 https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하였으나 에러발생
+
+http://blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220915578619&redirect=Dlog&widgetTypeCall=true
