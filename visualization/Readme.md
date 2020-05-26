@@ -14,6 +14,8 @@ https://kuduz.tistory.com/1196
 
 https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220909725602&targetKeyword=&targetRecommendationCode=1 - 한글자료
 
+http://blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=221004882027 - 
+
 Interact with your data and create interactive plots - Shiny app의 Basic structure 설명
 
 2) Shiny dashboard 호스팅 방법
