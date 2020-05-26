@@ -23,3 +23,5 @@ Interact with your data and create interactive plots - Shiny app의 Basic struct
 https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하였으나 에러발생
 
 http://blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220915578619&redirect=Dlog&widgetTypeCall=true
+
+https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220892395419&proxyReferer=https:%2F%2Fwww.google.com%2F
