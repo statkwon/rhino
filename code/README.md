@@ -2,6 +2,7 @@
 
 # Description
 #### Modeling1에서 Train-Test Split을 하지 않은 이유
+- 사용한 머신러닝 기법: DT, Bagging, RF
 1) 모델링을 통해 Variable Importance를 구하는 데에 목적이 있다.
 2) Error를 낮추는 것이 목적이 아니다.
 3) 서울시 구가 25개로 적다.
