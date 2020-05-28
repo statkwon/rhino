@@ -18,7 +18,7 @@ http://blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=221004882027 - 레이아
 
 Interact with your data and create interactive plots - Shiny app의 Basic structure 설명
 
-https://rstudio.github.io/shinydashboard/structure.html - layout 설정에 대한 코드
+https://rstudio.github.io/shinydashboard/structure.html - layout 설정에 대한 코드(infobox등 여러가지 box를 넣는 법}
 
 https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-when-more-functions-in-menuitem-using-shiny-and - body의 menuitem menu별로 input type 조정하는법
 
