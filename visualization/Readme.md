@@ -24,7 +24,9 @@ https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-whe
 
 https://github.com/rstudio/shinydashboard/issues/25 - select input을 tab에 넣었을 때 뜨는 에러 해결(시도결과 에러 해결 X)
 
-https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-when-more-functions-in-menuitem-using-shiny-and - several input types을 tab에 넣어을 때 근래 발생하는 문제 해결법
+https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-when-more-functions-in-menuitem-using-shiny-and - several input types을 tab에 넣어을 때 근래 발생하는 문제 해결법 (찐문제해결)
+
+
 
 2) Shiny dashboard 호스팅 방법
 
