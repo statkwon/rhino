@@ -35,3 +35,26 @@ https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하�
 http://blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220915578619&redirect=Dlog&widgetTypeCall=true
 
 https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220892395419&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+
+2020.06.01 Visualization 팀 회의(대쉬보드 레이아웃 구조)
+Tab1) Data table1 -> 소수점 정리하기
+-> Feature table
+
+Tab2) Feature별 barplot구하기 
+
+Tab3) Interactive map1 (색깔의 진하기로 값 표시) (권상이형)
+-> Sidebar에 feature 선택
+
+Tab4) Data table2
+-> 수소차대수 table
+-> Check box(단일선택)로 updating
+
+Tab5) Interactive map2
+-> 수소 충전소 입지 선정
+-> Check box(단일선택)로 updating
+ 
+필요사항 : 
+Tab1) 소수점 정리
+Tab2) 레이아웃(특히 사이즈)조정
+Tab3) 레이아웃 조정
