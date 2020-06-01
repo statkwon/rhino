@@ -38,19 +38,19 @@ https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220892395419&proxyRef
 
 
 2020.06.01 Visualization 팀 회의(대쉬보드 레이아웃 구조)
-Tab1) Data table1 -> 소수점 정리하기
+- Tab1) Data table1 -> 소수점 정리하기
 -> Feature table
 
-Tab2) Feature별 barplot구하기 
+- Tab2) Feature별 barplot구하기 
 
-Tab3) Interactive map1 (색깔의 진하기로 값 표시) (권상이형)
+- Tab3) Interactive map1 (색깔의 진하기로 값 표시) (권상이형)
 -> Sidebar에 feature 선택
 
-Tab4) Data table2
+- Tab4) Data table2
 -> 수소차대수 table
 -> Check box(단일선택)로 updating
 
-Tab5) Interactive map2
+- Tab5) Interactive map2
 -> 수소 충전소 입지 선정
 -> Check box(단일선택)로 updating
  
