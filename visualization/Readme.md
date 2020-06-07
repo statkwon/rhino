@@ -58,3 +58,4 @@ https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220892395419&proxyRef
 Tab1) 소수점 정리
 Tab2) 레이아웃(특히 사이즈)조정
 Tab3) 레이아웃 조정
+-> animation 
