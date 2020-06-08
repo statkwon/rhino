@@ -1,0 +1,6 @@
+[submodule "hugograyscale"]
+	path = hugograyscale
+	url = https://github.com/runningstream/hugograyscale/
+[submodule "themes/grayscale"]
+	path = themes/grayscale
+	url = https://github.com/runningstream/hugograyscale.git
