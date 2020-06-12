@@ -26,7 +26,8 @@ https://github.com/rstudio/shinydashboard/issues/25 - select input을 tab에 넣
 
 https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-when-more-functions-in-menuitem-using-shiny-and - several input types을 tab에 넣어을 때 근래 발생하는 문제 해결법 (찐문제해결)
 
-
+https://stackoverflow.com/questions/21465411/r-shiny-passing-reactive-to-selectinput-choices
+(Tab 1개에 selectinput을 여러개 넣어서 reactive input을 받는 법)
 
 2) Shiny dashboard 호스팅 방법
 
