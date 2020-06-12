@@ -1,3 +1,8 @@
+#prerequisite1: modeling3_split.R 돌리기
+#prerequisite2: cross_validation_glm.R 돌리기기
+car_gu <- read.csv('data/cleansing/car_gu.csv')
+car <- read.csv('data/cleansing/car_v2.csv')
+
 library(tidyverse)
 #simulation from glm model
 col_model <- colnames(data)
