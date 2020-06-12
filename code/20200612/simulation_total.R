@@ -46,7 +46,6 @@ loc_data <- car %>%
 
 #Edit here idx number
 new_gas <- loc_data[loc_data$idx ==150,]
-new_gas
 data_dist <- data_new %>% 
   mutate(d3 = sqrt((lat - new_gas$lat)^2+
                      (lng - new_gas$lng)^2)) %>%  
