@@ -15,7 +15,7 @@
 - 중요변수: inflow, enterprise, outflow, university, distributor
 - 이미지파일: VI_randomforest.png
 
-## 2. Modeling2_*** : 근거리 수소충전소 변수와 수소차 대수의 상관관계 분석 (car_v2.csv 활용)
+## 2. Modeling2_*** : 근거리 수소충전소 변수와 수소차 대수의 상관관계 분석
 #### GLM Modeling2 결과
 rank1~rank4까지 모두 유의미한 상관관계
 
