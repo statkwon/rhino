@@ -5,17 +5,20 @@
 최종선택 중요변수: outflow, land_value, enterprise, distributor
 
 #### 세부 모델별 요약
-1) Bagging (modeling1_bagging2.R)
+1) Bagging
 - 중요변수: enterprise, inflow, land_value, outflow, university
 - 이미지파일: VI_bagging.png
+- R파일: modeling1_bagging2.R
 
-2) Decision Tree (modeling1_decisiontree.R)
+2) Decision Tree
 - 중요변수: inflow, outflow, enterprise, day_pop, distributor
 - 이미지파일: VI_decisiontree.png
+- R파일: modeling1_decisiontree.R
 
-3) Random Forest (modeling1_randomfrest.R)
+3) Random Forest
 - 중요변수: inflow, enterprise, outflow, university, distributor
 - 이미지파일: VI_randomforest.png
+- R파일: modeling1_randomfrest.R
 
 ## 2. Modeling2_*** : 근거리 수소충전소 변수와 수소차 대수의 상관관계 분석
 #### GLM Modeling2 결과
@@ -23,8 +26,10 @@ rank1~rank4까지 모두 유의미한 상관관계
 
 ## 3. Modeling3_*** : 최종예측모델 선정
 #### 목표: MSE 계산을 통해, 해석력과 예측력을 골고루 갖춘 모형 선택
-- DecisionTree: 27.86282 (modeling3_decisiontree.R)
-- GLM: 5.76 (modeling3_glm2.R)
+1. DecisionTree: 27.86282 
+- R파일: modeling3_decisiontree.R
+2. GLM: 5.76
+- R파일: modeling3_glm2.R
 #### MSE가 더 작은 GLM 선택
 
 ## 본 폴더에는 습작도 포함되어 있다.
