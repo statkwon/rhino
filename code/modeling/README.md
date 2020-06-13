@@ -35,7 +35,7 @@
 - R파일: modeling3_glm2.R
 #### MSE가 더 작은 GLM 선택
 
-## 본 폴더에는 습작도 포함되어 있다.
+## 상위 폴더에는 습작도 포함되어 있다.
 - 습작1. modeling1_adaboost.R: Error in if (nrow(object$splits) > 0) { : 인자의 길이가 0입니다
 - 습작2. modeling1_bagging.R: Error in if (nrow(object$splits) > 0) { : 인자의 길이가 0입니다
 - 습작3. modeling1_bagging3.R
