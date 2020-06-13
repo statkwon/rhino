@@ -1,10 +1,9 @@
 # 2020.06.11 Update
 - 다양한 모델링 시도 완료
 ## 1. Modeling1_*** : Variable Importance 파악
-- [충전소 주인 입장] 특정 구에 충전소를 설치해도 되는가.
+#### [충전소 주인 입장] 특정 구에 충전소를 설치해도 되는가.
 - Modeling1 결과
     - 최종선택 중요변수: outflow, land_value, enterprise, distributor
-
 - 세부 모델별 요약
 1) Bagging
 - 중요변수: enterprise, inflow, land_value, outflow, university
