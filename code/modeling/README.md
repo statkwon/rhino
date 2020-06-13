@@ -1,3 +1,5 @@
+# 2020.06.11 Update
+- 다양한 모델링 시도 완료
 ## 1. Modeling1_*** : Variable Importance 파악
 #### Modeling1 결과
 최종선택 중요변수: outflow, land_value, enterprise, distributor
