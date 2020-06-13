@@ -84,6 +84,6 @@ for (i in 1:N){
 }
 
 #Top5 산출
-a <- 0:4
+a <- 0:4 #Top N 까지 산출하고 싶으면 0:(N-1)로 수정하기
 idx <- data.frame(sapply(sort(pred_zip, index.return=TRUE), `[`, length(pred_zip)-a))$ix
 loc_data[idx,] %>% select(gu, dong) #쌍문동, 길음동, 창동, 미아동, 하월곡동
