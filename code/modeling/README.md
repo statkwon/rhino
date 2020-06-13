@@ -1,6 +1,7 @@
 # 2020.06.11 Update
 - 다양한 모델링 시도 완료
 ## 1. Modeling1_*** : Variable Importance 파악
+### [충전소 주인 입장] 특정 구에 충전소를 해도 되는가.
 #### Modeling1 결과
 최종선택 중요변수: outflow, land_value, enterprise, distributor
 
@@ -21,11 +22,13 @@
 - R파일: modeling1_randomfrest.R
 
 ## 2. Modeling2_*** : 근거리 수소충전소 변수와 수소차 대수의 상관관계 분석
+### [수소차 주인 입장] 특정 구에 충전소가 설치된다면, 수소차를 살 것인가.
 #### GLM Modeling2 결과
 - rank1~rank4까지 모두 유의미한 상관관계
 - R파일: modeling2_glm.
 
 ## 3. Modeling3_*** : 최종예측모델 선정
+### [수소차 주인 입장] 특정 구에 충전소가 설치된다면, 수소차를 살 것인가.
 #### 목표: MSE 계산을 통해, 해석력과 예측력을 골고루 갖춘 모형 선택
 1. DecisionTree: 27.86282 
 - R파일: modeling3_decisiontree.R
