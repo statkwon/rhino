@@ -1,5 +1,9 @@
 ## 1. Modeling1_*** : Variable Importance를 파악하기 위해 다양한 모델링을 시도하였다.
-### 세부 모델별 요약
+
+#### Modeling1 결과
+최종선택 중요변수: outflow, land_value, enterprise, distributor
+
+#### 세부 모델별 요약
 1) Bagging (modeling1_bagging2.R)
 - 중요변수: enterprise, inflow, land_value, outflow, university
 - 이미지파일: VI_bagging.png
@@ -12,11 +16,7 @@
 - 중요변수: inflow, enterprise, outflow, university, distributor
 - 이미지파일: VI_randomforest.png
 
-#### Modeling1 결과
-최종선택 중요변수: outflow, land_value, enterprise, distributor
-
-
-
+## 2. Modeling3_*** : Variable
 
 #### 습작도 포함되어있다.
 습작1. modeling1_adaboost.R
