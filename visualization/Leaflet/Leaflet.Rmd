@@ -1,0 +1,115 @@
+---
+layout: page
+title: "Leaflet을 이용한 서울시 Interactive Map"
+author: "작성자 : 정권상"
+output:
+  html_document:
+    theme: default
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_sections: TRUE
+---
+***
+**서울시 지도 시각화를 위해 시도한 두번째 방법은 Leaflet을 사용하는 방법이다. <br>
+Leaflet은 웹 매핑 응용프로그램을 구축하는데 사용되는 오픈 소스 Javascript 라이브러리이다. 자세한 설명과 사용법은 [Leaflet 웹사이트](https://leafletjs.com/)를 참조한다.**
+
+# 필요 패키지 불러오기
+***
+```{r}
+library(leaflet)
+leaflet() %>%
+  addTiles()
+```
+leaflet 패키지를 이용할 경우 addTiles() 명령어 하나만으로도 Interactive한 세계 지도를 화면에 띄울 수 있다.
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  setView(127.001699, 37.564214, zoom = 11)
+```
+또한 setView() 명령어를 통해 중심 좌표를 서울의 위도와 경도로 설정할 경우, 서울시를 중심으로 하는 지도를 출력하는 것이 가능하다. 사실 기본적인 기능만으로도 원하는 곳의 지도를 띄우고 마커를 추가하는 등의 작업이 가능하다. 하지만 프로젝트에서는 구별 특성에 따른 단계구분도를 그리는 것을 목표로 하기 때문에 몇 가지 추가적인 과정을 거쳐야 한다.
+
+# 대한민국 최신 행정구역 SHP 파일 다운로드
+***
+```{r}
+library(raster)
+korea = shapefile('TL_SCCO_SIG.shp')
+korea = spTransform(x = korea, CRSobj = CRS('+proj=longlat +datum=WGS84'))
+korea = korea[1:25,]
+head(korea@data)
+```
+leaflet 맵 상에서 서울시의 구별로 경계를 그리기 위해서는 addPolygons() 명령어를 사용해야 하는데, 이때 데이터 내에 polygon 정보를 포함하고 있는 SHP 파일이 필요하다. 다행히도 대한민국 최신 행정구역의 SHP 파일은 다음 사이트에서 무료로 다운로드 받을 수 있다. [GIS DEVELOPER](http://www.gisdeveloper.co.kr/?p=2332) 프로젝트에서는 구별 지도를 그리는 것을 목표로 하므로 시군구를 기준으로 하는 파일을 다운로드 받으면 된다. <br>
+R에서 SHP 파일을 불러오기 위해서는 raster 패키지를 사용해야 한다. 또한 다운로드 받은 SHP 파일은 GRS80 좌표계 기준이므로 leaflet에서 사용하는 WGS84 좌표계를 기준으로 변환해야 한다. spTransform() 명령어를 통해 이를 수행할 수 있다. <br>
+우리는 서울시의 데이터만 필요하므로 1행부터 25행까지의 데이터만 사용한다.
+
+# 서울시 구별 특성 테이블
+***
+```{r}
+data = read.csv('data.csv')
+DT::datatable(data)
+```
+데이터 수집 단계에서 만들었던 서울시 구별 특성 테이블을 불러온다.
+
+# 데이터 병합
+***
+```{r}
+korea@data = sp::merge(korea@data, data)
+head(korea@data)
+```
+SHP 파일은 'data', 'polygons', 'plotOrder', 'bbox', 'proj4string'으로 구성되어있다. 여기서 'data' 에 각 구의 이름과 시군구코드가 저장되어있고, 'polygons'에 구별 위도, 경도가 저장되어있다. 지도에 나타내고 싶은 구별 특성은 'data'에 병합하여 저장하면 된다.
+
+# 지도 그리기
+***
+```{r}
+pal1 = colorBin(palette = 'Greys', domain = korea@data$학교수)
+```
+우선 단계구분을 위한 팔레트를 먼저 생성한다. 여기서는 구별 '학교수'를 기준으로 한다.
+```{r}
+library(leaflet.extras)
+korea %>%
+  leaflet() %>%
+  addTiles(group = 'OSM') %>%
+  addProviderTiles('CartoDB', group = 'Carto') %>%
+  addProviderTiles('Esri', group = 'Esri') %>%
+  setView(127.001699, 37.564214, zoom = 11) %>%
+  addSearchOSM() %>%
+  addResetMapButton() %>%
+  addPolygons(weight = 3,
+              fillOpacity = 0.8,
+              fillColor = ~pal1(학교수),
+              color = 'black',
+              label = ~구,
+              highlight = highlightOptions(weight = 3,
+                                           color = 'red',
+                                           bringToFront = TRUE),
+              group = '학교수') %>%
+  addLegend(title = '학교수', pal = pal1, values = ~학교수, opacity = 1,
+            position = 'bottomright', group = '학교수') %>%
+  addLayersControl(baseGroups = c('OSM', 'Carto', 'Esri'))
+```
+본격적으로 서울시 구별 특성 지도를 그려보도록 할 것이다. addTiles() 명령어만 입력하였을 때 제공되는 기본 테마 이외에도 addProviderTiles() 명령어를 사용하여 'CartoDB', 'Esri' 등 다양한 테마를 적용할 수 있다. 또한  leaflet.extras 패키지를 불러올 시 addSearchOSM(), addResetMapButton() 등 interactive한 요소들을 추가하는 것도 가능하다.
+```{r}
+pal2 = colorBin(palette = 'YlGn', domain = korea@data$공시지가)
+korea %>%
+  leaflet() %>%
+  addTiles(group = 'OSM') %>%
+  addProviderTiles('CartoDB', group = 'Carto') %>%
+  addProviderTiles('Esri', group = 'Esri') %>%
+  setView(127.001699, 37.564214, zoom = 11) %>%
+  addSearchOSM() %>%
+  addResetMapButton() %>%
+  addPolygons(weight = 3,
+              fillOpacity = 0.8,
+              fillColor = ~pal2(공시지가),
+              color = 'black',
+              label = ~구,
+              highlight = highlightOptions(weight = 3,
+                                           color = 'red',
+                                           bringToFront = TRUE),
+              group = '공시지가') %>%
+  addLegend(title = '공시지가', pal = pal2, values = ~공시지가, opacity = 1,
+            position = 'bottomright', group = '공시지가') %>%
+  addLayersControl(baseGroups = c('OSM', 'Carto', 'Esri'))
+```
+위 지도는 구별 '공시지가'를 기준으로 그린 것이다.
