@@ -1,0 +1,62 @@
+---
+layout: page
+title: "kormaps2014를 이용한 서울시 Interactive Map"
+author: "작성자 : 정권상"
+output:
+  html_document:
+    theme: default
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_sections: TRUE
+---
+***
+**서울시 지도 시각화를 위해 시도한 첫번째 방법은 kormaps2014 패키지를 사용하는 방법이다. <br>
+비교적 쉽게 지도를 제작할 수 있다는 점에서 장점을 갖지만, 결과물이 다소 투박하고 단순하다는 단점 역시 존재한다.**
+
+# 필요 패키지 설치
+***
+```{r eval = F}
+install.packages("devtools")
+devtools::install_github("cardiomoon/kormaps2014")
+devtools::install_github("cardiomoon/moonBook2")
+```
+github 주소를 통해 'kormaps2014'와 'moonBook2' 패키지를 설치한다.
+
+# 필요 패키지 불러오기
+***
+```{r}
+library(ggplot2)
+library(kormaps2014)
+library(moonBook2)
+str(kormap2)
+```
+kormaps2014 패키지에는 areacode, kormap1, kormap2, kormap3, korpop1, korpop2, korpop3, tbc가 포함되어있는데, 이중 kormap2(2014년 한국행정지도(시군구별))를 사용한다. <br>
+*각각의 데이터에 대한 설명은 [문건웅님의 문서](https://rstudio-pubs-static.s3.amazonaws.com/222145_fdcc8a5cb9584950ae7e8097304bf398.html)를 참조*
+
+# 서울시 구별 특성 테이블
+***
+```{r}
+data = read.csv('data.csv')
+DT::datatable(data)
+```
+데이터 수집 단계에서 만들었던 서울시 구별 특성 테이블을 불러온다.
+
+# 데이터 병합
+***
+```{r}
+new_data = korpop2[1:25,]
+new_data[,26:40] = data[,3:16]
+```
+kormap2를 바탕으로 서울시 구별 특성을 단계별 지도로 만들기 위해 kormaps2014 패키지에 있는 korpop2의 형식을 빌어 new_data를 생성한다. korpop2는 전국 단위의 테이블이기 때문에 서울시 부분인 처음 1행~25행까지만 인덱싱하여 사용하면 된다.
+
+# ggChoropleth를 이용하여 지도 그리기
+***
+```{r}
+ggChoropleth(new_data, kormap2, fillvar='공시지가', subarea=c('서울'),
+             tooltip='행정구역별_읍면동', title = '공시지가', interactive=T)
+ggChoropleth(new_data, kormap2, fillvar='공시지가', subarea=c('서울'),
+             tooltip='행정구역별_읍면동', title = '대학수', interactive=T)
+```
+이후 ggChoropleth를 이용하여 Interactive Map을 완성한다.
