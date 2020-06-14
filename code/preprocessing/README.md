@@ -15,13 +15,13 @@ gas_tbl$outflow[3] <- predict(outflow.lm, newdata = gas_tbl %>% filter(gu == '�
 ```
 - gasstation_imputation.csv로 저장하고, 추후 imputation된 파일로 진행할 것
 
-## 2. 차량 관련데이터 전처리 코드 순서
-### ( data2(법정동_기준).R -> data2(행정동_기준).R -> preprocessing.R)
+## 2. 차량 관련데이터
+### 전처리 코드 순서 : ( data2(법정동_기준).R -> data2(행정동_기준).R -> preprocessing.R)
 
 - 사용한 파일 목록 : 서울시 자동차 등록현황(동별, 연료별)(20190430).xls, locate.csv, report.csv, 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv, 서울시_근교_충전소좌표(정리).txt
 
 - 데이터 병합에 있어서 동 분류 기준이 다르다는 점 확인. (법정동 / 행정동 두 가지로 분류)
-- 이후 행정동은 차량 대수 데이터 확보를 위해 자치구 단위로 합침.
+- 이후 행정동 기준 데이터는 차량 대수 데이터 확보를 위해 자치구 단위로 합침.
 
 ### 최종 전처리 완료 데이터 2가지 산출
 - car_v2.csv : 법정동 기준으로 분류, row(데이터)가 많지만 col(변수)이 적음
