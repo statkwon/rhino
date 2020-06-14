@@ -61,4 +61,8 @@ https://m.blog.naver.com/PostView.nhn?blogId=hsj2864&logNo=220892395419&proxyRef
 Tab1) 소수점 정리
 Tab2) 레이아웃(특히 사이즈)조정
 Tab3) 레이아웃 조정
--> animation 
+-> animation
+
+2020.06.12~14 Visualization 팀 주요 변동 사항
+- Tab5) 수소 충전소 입지 선정 구현 완료.(구, 동 2가지의 drop-down menu를 이용하여 업데이트)
+- Tab4)와 Tab5) 통합 및 테이블과 지도를 박스에 넣어서 레이아웃을 새롭게 배치.
