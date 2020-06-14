@@ -1,5 +1,6 @@
 #EDA - gas station
 #강북구 imputation된 데이터
+gas_tbl <- read.csv("data/cleansing/gasstation_imputation.csv")
 
 #corr polot
 gas_corr <- cor(gas_tbl[,5:16])
