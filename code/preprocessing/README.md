@@ -22,5 +22,5 @@ gas_tbl$outflow[3] <- predict(outflow.lm, newdata = gas_tbl %>% filter(gu == '�
 - 데이터 병합에 있어서 동 분류 기준이 다르다는 점 확인. (법정동 / 행정동 두 가지로 분류)
 
 - 최종 전처리 완료 데이터 2가지 산출
-- 1. car_v2.csv : 법정동 기준으로 분류, row(데이터)가 많지만 col(변수)이 적음
-- 2. car_gu.csv : 자치구 기준으로 분류, row(데이터)가 작지만 col(변수)가 다양함
+- car_v2.csv : 법정동 기준으로 분류, row(데이터)가 많지만 col(변수)이 적음
+- car_gu.csv : 자치구 기준으로 분류, row(데이터)가 작지만 col(변수)가 다양함
