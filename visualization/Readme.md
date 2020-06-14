@@ -1,4 +1,4 @@
-# 팀원 : 서경덕, 정권상
+# Visualization 담당 : 서경덕, 정권상
 
 Our goal is to make a interactive plot dashboard using shinydashboard in R.
 
