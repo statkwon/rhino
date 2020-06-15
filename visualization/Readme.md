@@ -31,6 +31,8 @@ https://stackoverflow.com/questions/50245925/tabitem-cannot-show-the-content-whe
 https://stackoverflow.com/questions/21465411/r-shiny-passing-reactive-to-selectinput-choices
 (Tab 1개에 selectinput을 여러개 넣어서 reactive input을 받는 법)
 
+https://github.com/rstudio/shiny/issues/650 (플랏 사이즈 조정 -> body에 조정하고 server에도 조정해야함! 총 두번)
+
 2) Shiny dashboard 호스팅 방법
 
 https://wikidocs.net/66610 -> ui, server R파일 따로 만들어서 시도하였으나 에러발생
