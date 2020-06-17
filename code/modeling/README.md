@@ -31,8 +31,8 @@
 - 목표: MSE 계산을 통해, 해석력과 예측력을 골고루 갖춘 모형 선택
 1. DecisionTree: 27.86282 
     - R파일: modeling3_decisiontree.R
-2. GLM: 5.76
-    - R파일: modeling3_glm2.R
+2. GLM: 13.5
+    - R파일: modeling3_split.R
 - 결론: MSE가 더 작은 GLM 선택
 
 ## 상위 폴더에는 습작도 포함되어 있다.
