@@ -30,3 +30,5 @@ POINT: 특정 지역의 미래에 등록될 수소차 대수를 예측한다.<br
 시각화(정권상, 서경덕) : 대쉬보드 레이아웃 완성 및 온라인 배포 준비중<br>
 [**6/8**]<br>
 페이지(이현탁) : 얼개 완성 및 활성화, 수시로 내용 추가 필요 (https://rhinoblog.netlify.app/) <br>
+[**6/17**]
+페이지(이현탁) : 블로그 완성(https://rhinoblog.netlify.app/), github.io 배포(https://11aw1iet.github.io/rhino/)
