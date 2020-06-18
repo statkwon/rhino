@@ -39,7 +39,7 @@ summary(modFit_repeatedcv)
 
 #simulation from glm model
 col_model <- colnames(data)
-xdata_new <- car_gu %>%
+data_new <- car_gu %>%
   full_join(gas, by ="gu") %>%
   select(all_of(col_model), lat, lng) %>% 
   mutate(d1 = r1, d2 = r2, before_car = Hyd_car) %>% 
@@ -77,6 +77,11 @@ for (i in 1:N){
                              before_pred = predict(modFit_repeatedcv, data), 
                              after_pred = predict(modFit_repeatedcv, data_simul))
   
+  #round and max after_pred
+  for (idx in 1:25){
+    simul_result[idx,4] <- max(simul_result[idx,2], round(simul_result[idx,4]))
+  }
+  
   #compare before, after
   #apply(simul_result[,2:4],2, sum) #before, after 모두 출력
   
@@ -87,4 +92,5 @@ for (i in 1:N){
 #Top5 산출
 a <- 0:4 #Top N 까지 산출하고 싶으면 0:(N-1)로 수정하기
 idx <- data.frame(sapply(sort(pred_zip, index.return=TRUE), `[`, length(pred_zip)-a))$ix
-loc_data[idx,] %>% select(gu, dong) #쌍문동, 길음동, 창동, 미아동, 하월곡동
+loc_data[idx,] %>% select(gu, dong) #미아동, 길음동, 번동, 월계동, 장위동동
+# pred_zip[idx] - sum(simul_result[,2]) #top 5 늘어난 대수
