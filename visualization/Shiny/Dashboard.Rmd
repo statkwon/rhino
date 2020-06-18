@@ -1,0 +1,120 @@
+---
+layout: page
+title: "Shiny를 이용한 시각화 대시보드 제작"
+author: "작성자 : 정권상"
+output:
+  html_document:
+    theme: default
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_sections: TRUE
+runtime: shiny
+---
+***
+**Shiny를 이용하면 시각화 대시보드를 쉽고 빠르게 구축할 수 있다. 심지어 DT나 Leaflet등의 요소를 삽입하는 것도 가능하기 때문에 지금까지의 작업물들을 한 곳에 모아서 보여줄 수 있다는 점에서 Shiny를 사용하게 되었다.**
+
+# 필요 패키지 불러오기
+***
+```{r}
+library(shiny)
+library(shinydashboard)
+```
+대시보드를 구현하기 위해서는 shiny와 shinydashboard 패키지를 불러와야 한다. 샤이니 대시보드는 크게 ui와 server의 두 가지 파트로 구성되어 있다. ui에서는 header, sidebar, body 등 화면에 표현될 것들을 정의한다. header는 페이지 제목, sidebar는 사이드바에 추가할 옵션 및 기능들, body는 메인 컨텐츠에 해당하는 테이블, 그래프, 지도 등을 포함한다. server 파트는 함수의 형식으로 정의된다. ui 파트에서 생성한 input과 output값을 가지고 실제 결과물이 어떻게 나타날지를 정해주는 부분이다.
+
+# 테스트 페이지
+***
+```{r}
+header = dashboardHeader(title = '테스트 페이지')
+sidebar = dashboardSidebar()
+body = dashboardBody()
+
+ui = dashboardPage(header, sidebar, body)
+```
+테스트 페이지를 만들어보도록 하자. 페이지 제목만 '테스트 페이지'로 정하고 나머지 항목들은 공백으로 남겨둔다.
+
+```{r}
+server = function(input, output){}
+```
+server 파트 역시 함수의 형식으로 나타내되, 공백으로 남겨둔다.
+
+```{r}
+shinyApp(ui, server)
+```
+마지막으로 ui와 server를 shinyApp() 명령어를 통해 묶어주면 테스트 페이지가 로딩되는 것을 확인할 수 있다. 지금까지는 테스트 페이지의 제목만 정해주고 나머지는 모두 공백으로 두었기 때문에 제목만 있고 내용은 비어있는 결과가 나타나게 된다.
+
+# Shiny + Leaflet
+***
+이번에는 샤이니 대시보드에 Leaflet을 이용하여 제작한 Interactive Map을 삽입해보겠다. 우선 지도를 제작할 때 사용했던 모든 패키지와 파일을 불러와야 한다.
+```{r}
+library(leaflet)
+library(leaflet.extras)
+library(raster)
+
+korea = shapefile('TL_SCCO_SIG.shp')
+korea = spTransform(x = korea, CRSobj = CRS('+proj=longlat +datum=WGS84'))
+korea = korea[1:25,]
+data = read.csv('data.csv')
+korea@data = sp::merge(korea@data, data)
+```
+서울시의 구별 특성 단계구분도를 대시보드의 한 화면에 추가할 것이다. sidebar에서 특성을 선택하면 선택한 특성에 따라 지도가 수정되는 형식으로 만들어보겠다.
+```{r}
+convertMenuItem = function(mi,tabName){
+  mi$children[[1]]$attribs['data-toggle']="tab"
+  mi$children[[1]]$attribs['data-value']= tabName
+  mi
+}
+
+header = dashboardHeader(title = '수소차 충전소 입지 선정')
+sidebar = dashboardSidebar(
+  sidebarMenu(
+    convertMenuItem(menuItem('구별 특성 지도', tabName = 'feature_map',
+                             selectInput('features', 'Features', choices=colnames(data)[3:16], multiple=F, selected='주유소수')), tabName = 'feautre_map')
+    )
+)
+body = dashboardBody(tags$style(type = "text/css",
+                                "#map1 {height: calc(100vh - 80px) !important;}"),
+                       tabItem(tabName = 'feature_map', leafletOutput('map1')))
+
+ui = dashboardPage(header, sidebar, body)
+```
+특성 선택을 위한 드롭다운 메뉴를 만들기 위해서는 'convertMenuItem'이라는 함수를 사용해야 한다. 이 코드를 추가하지 않으면 에러가 발생하므로 반드시 추가해주도록 하자. 선택된 특성이 Input이 되고, 이 Input값에 따라 지도에 나타나는 Output이 달라지게 된다.
+```{r}
+server = function(input, output) {
+  output$map1 = renderLeaflet({
+    x = reactive({
+      data[,input$features]
+    })
+    pal1 = colorBin(palette = 'YlGn', domain = x())
+    korea %>%
+      leaflet() %>%
+      addProviderTiles('Esri', group = 'Esri') %>%
+      addTiles(group = 'OSM') %>%
+      addProviderTiles('CartoDB', group = 'Carto') %>%
+      setView(127.001699, 37.564214, zoom = 10) %>%
+      addSearchOSM() %>%
+      addResetMapButton() %>%
+      addPolygons(weight = 3,
+                  fillOpacity = 0.8,
+                  fillColor = ~pal1(x()),
+                  color = 'black',
+                  label = ~paste0(구, ' : ', x()),
+                  highlight = highlightOptions(weight = 3,
+                                               color = 'red',
+                                               bringToFront = TRUE),
+                  group = data$구) %>%
+      addLegend(title = input$features, pal = pal1, values = ~x(), opacity = 1,
+                position = 'bottomright', group = input$features) %>%
+      addLayersControl(baseGroups = c('Esri', 'OSM', 'Carto'))
+  })
+}
+```
+샤이디 대시보드에 Leaflet을 이용해 만든 지도를 삽입하기 위해서는 renderLeaflet() 명령어를 사용해야 한다. 또한 addPolygons의 label이나 addLegend의 values 등 구에 따라 달라지는 값을 설정하고 싶은 경우 각각에 대해 reactive variable을 사용해야 한다. 그래야 클릭한 특성에 따라서 즉각적으로 반응하는 결과물을 제작할 수 있다.
+
+# 결과 및 프로젝트 최종 대시보드 확인
+***
+```{r}
+shinyApp(ui, server)
+```
+shinyApp을 통해 결과를 확인하면 대시보드 안에 지도가 잘 들어가 있는 것을 확인할 수 있다. 이 외에도 테이블이나 그래프 등 다양한 요소를 추가할 수 있다. 실제 프로젝트에서 완성한 결과물은 [Rhino Project 사이트](https://rhinoblog.netlify.app/)에 방문하여 'Visualization' 탭을 눌러 확인할 수 있다.
