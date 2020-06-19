@@ -17,10 +17,6 @@ row.names(loc_data) = paste(loc_data$gu, loc_data$dong, sep = '.')
 korea@data = sp::merge(korea@data, data)
 korea@data = sp::merge(korea@data, simul)
 
-options(shiny.error = function() {
-  stop("")
-})
-
 convertMenuItem = function(mi,tabName){
   mi$children[[1]]$attribs['data-toggle']="tab"
   mi$children[[1]]$attribs['data-value']= tabName
@@ -44,7 +40,9 @@ sidebar = dashboardSidebar(
 
 body = dashboardBody(tags$style(type = "text/css",
                                 "#map1 {height: calc(100vh - 80px) !important;}",
-                                "#map2 {height: calc(90vh - 40px) !important;}"),
+                                "#map2 {height: calc(90vh - 40px) !important;}",
+                               ".shiny-output-error {visibility: hidden;}",
+                                ".shiny-output-error:before {visibility: hidden;}"),
                      tags$head(tags$script('
                                 var dimension = [0, 0];
                                 $(document).on("shiny:connected", function(e) {
