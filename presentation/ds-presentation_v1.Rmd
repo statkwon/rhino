@@ -2,7 +2,7 @@
 title: "2020 데이터사이언스 입문<br>"
 subtitle: "서울시 수소차 확산에 관한 예측 <br><br>"
 author: "팀 RHINO"
-date: "2020년 6월 22월"
+date: "2020년 6월 22일"
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css
@@ -12,15 +12,11 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 
+      
+
 ---
-```{r xaringan-themer, include=FALSE, warning=FALSE}
-library(xaringanthemer)
-style_mono_light(base_color = "#23395b",
-  header_font_google = google_font("Josefin Sans"),
-  text_font_google   = google_font("Jua", "Black Han Sans", "Do Hyeon"),
-  code_font_google   = google_font("Fira Mono")
-)
-```
+
+
 background-image: url("https://i.pinimg.com/originals/4e/73/d4/4e73d4c90394a0040767af0fda11f0d6.jpg")
 class: center, middle, inverse
 
@@ -34,6 +30,16 @@ knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE,
 
 
 ```
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color = "#23395b",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Jua", "Black Han Sans", "Do Hyeon"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+
 
 
 # 팀 RHINO
@@ -63,6 +69,13 @@ class: inverse, middle, center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC2.png?raw=true" alt= "기사" />
 
 ---
+## 수소차란 무엇인가
+
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
+
+
+---
+
 ## 국내 현황
 .pull-left[
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC3.png?raw=true" alt= "국내 계획" />
@@ -81,12 +94,23 @@ class: center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC5.png?raw=true" alt= "닭계란" />
 
 ---
+## 수요 / 공급
+
+.pull-left[
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC6.png?raw=true" alt= "보조금지급" />
+]
+
+.pull-right[
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC8.png?raw=true" alt= "서울시장" />
+]
+
+### 서울시와의 협약을 통해 관심이 높아지는 중
+
+---
 
 ## 모델링
 
-1. 충전소 입지 선정에 필요한 변수
-
-2. 수소차 확산에 중요한 변수
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC21.png?raw=true" alt= "충전소" />
 
 ---
 ## 시뮬레이션 
@@ -95,19 +119,35 @@ class: center
 
 서울시에서 어디에 충전소가 생기면 수소차가 더 많이 늘어날까?
 
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC10.png?raw=true" alt= "충전소" />
+
 ---
 ## 대쉬보드
 
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC16.png?raw=true" alt= "대쉬보드" />
 
 ---
+## 깃허브 페이지
 
-## 블로그
-
-<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC14.png?raw=true" alt= "블로그" />
+[
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC19.PNG?raw=true" alt= "깃허브 페이지" /> 
+](https://11aw1iet.github.io/rhino/)
 
 ---
 
+## 블로그
+
+[<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC14.png?raw=true" alt= "블로그" />
+](https://rhinoblog.netlify.app/)
+
+---
+
+## 마크다운 PPT
+
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC20.PNG?raw=true" alt= "마크다운 ppt" /> 
+
+
+---
 
 class: inverse, middle, center
 
@@ -117,11 +157,16 @@ class: inverse, middle, center
 
 ## 데이터 추출 및 전처리
 
-1) 충전소 관련
+.pull-left[
+###1) 충전소 관련
+<img src="https://www.h2news.kr/data/photos/20190727/art_15619717218451_de3eaf.jpg" alt= "충전소" /> 
 
+]
 
-2) 수소차 관련
-
+.pull-right[
+###2) 수소차 관련
+<img src="https://img.hani.co.kr/imgdb/resize/2019/0118/53_1547803759_00502191_20190118.JPG" alt= "수소차" /> 
+]
 
 ---
 
@@ -129,27 +174,23 @@ class: inverse, middle, center
 
 > 데이터 출처
 
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC22.PNG?raw=true" alt= "열린 데이터 광장" /> 
+
 [서울 열린 데이터 광장](https://data.seoul.go.kr)
-: 자치구별 등록차량, 대학교, 기업체, 우통업체, 주차장
-
-
-[한국 감정원](http://www.r-one.co.kr/rone/resis/statistics/statisticsViewer.do?menuId=LFR_12200)
-: 공시지가 
-
-[교육 통계 서비스](https://kess.kedi.re.kr/mobile/search?searchTxt=%EC%84%9C%EC%9A%B8%EC%8B%9C%20%ED%96%89%EC%A0%95%EA%B5%AC%EC%97%AD%EB%B3%84%20%ED%95%99%EA%B5%90%EC%88%98)
-: 학교 수 
+: 자치구별 등록차량, 대학교, 기업체, 유통업체, 주차장 등등
 
 
 
 ---
 
 ## 데이터 추출 - part 1. 충전소 관련
-> 데이터 종합
 
 .pull-left[
-```{r}
+```{r data-gas}
 library(tidyverse)
+
 gasstation <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/gasstation_imputation.csv")
+
 as.tibble(data.frame(col = colnames(gasstation), 
            kor = c("자치구", "주유소 수", "등록차량 수", "차량 대비 주유소 수","유입교통량", "유출교통량",
                    "공시지가", "대학교", "기업체", "유통업체", "주차장", "학교", "도로면적", "인구", "주간인구",
@@ -158,11 +199,12 @@ as.tibble(data.frame(col = colnames(gasstation),
 ```
 ]
 .pull-right[
+> 데이터 종합
 
 <br><br><br>
 => 주유소 대비 차량 수에 영향을 주는 변수를 확인하고자 함
 
-데이터는 자치구 단위로 처리됨
+(데이터는 자치구 단위로 처리됨)
 
 ]
 ---
@@ -171,6 +213,8 @@ as.tibble(data.frame(col = colnames(gasstation),
 >NA 확인
 
 .pull-left[
+imputation이 필요한 변수들 :
+
 ```{r preprocessing-part1}
 library(ggplot2)
 
@@ -203,9 +247,10 @@ gas_tbl<- gas_tbl %>%
 
 
 ```
+
 ]
 .pull-right[
-=> imputation이 필요한 변수들 
+
 ]
 <br><br>
 road_area와 교통량(inflow, outflow)상관관계 높아서 유일변수로 회귀분석 실시
@@ -253,6 +298,8 @@ car <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cl
 dim(car)
 
 ```
+=> 법정동 기준으로 `r dim(car)[1]`개의 동
+
 
 
 - 행정동 기준 분류 
@@ -263,6 +310,7 @@ pop <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cl
 dim(pop)
 
 ```
+=> 행정동 기준으로 `r dim(pop)[1]`개의 동
 
 ---
 ## 데이터 전처리 - part 2. 수소차 관련
@@ -556,9 +604,13 @@ class: center
 1) Decision Tree
 
 - inflow
+
 - outflow
+
 - enterprise
+
 - day_pop
+
 - distributor
 
 ]
@@ -597,9 +649,13 @@ barplot(vi_dt, las=2, col='skyblue')
 2) Bagging
 
 - enterprise
+
 - inflow
+
 - land_value
+
 - outflow
+
 - university
 
 
@@ -638,9 +694,13 @@ vip(gas_bag2, num_features = 40, bar = FALSE)
 3) Random Forest
 
 - inflow
+
 - enterprise
+
 - outflow
+
 - university
+
 - distributor
 
 ]
@@ -734,7 +794,7 @@ hyd_dt_pred <- hyd_dt_pred %>%
   as.tibble()
 colnames(hyd_dt_pred) <- c('.pred', 'Hyd_car_z')
 
-library("MLmetrics")
+library(MLmetrics)
 mse_dt <- MSE(hyd_dt_pred$.pred, hyd_dt_pred$Hyd_car_z)
 
 y_mean <- mean(data$Hyd_car)
@@ -756,8 +816,8 @@ MSE 높다
 Linear Regression
 
 
-```{r}
-set.seed(2020)
+```{r glm-mse-1 , warning = TRUE}
+
 total_pop <- pop %>%
   group_by(gu) %>%
   summarise(total_pop = sum(pop))
@@ -767,8 +827,13 @@ data_model <- merge(car_gu_model, gas_tbl[,-3], by = 'gu')
 data_model <- data_model %>% 
   select(c("Hyd_car","r1", "r2", "outflow", "land_value", "enterprise", "distributor") )
 
-z_df = data.frame(1:25)
-df = data_model
+set.seed(2020)
+n <- sample(1:25, 17)
+train_data <- data_model[n,]
+test_data <- data_model[-n,]
+
+z_df = data.frame(1:17)
+df = train_data
 for(i in 1:ncol(df)){
   mean <- mean(df[,i])
   sd <- sqrt(var(df[,i]))
@@ -778,29 +843,135 @@ for(i in 1:ncol(df)){
 }
 train_data_z <- z_df[,-1]
 
-hyd_glm <- glm(Hyd_car~., data=train_data_z)
 
+z_df = data.frame(1:8)
+df2 = test_data
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df2[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df2)[i]
+}
+test_data_z <- z_df[,-1]
 
-hyd_glm_pred <- predict(hyd_glm, newdata = train_data_z)
+hyd_glm_2020 <- stats::glm(Hyd_car~., data=train_data_z)
 
+#prediction
+hyd_glm_pred_2020 <- stats::predict(hyd_glm_2020, newdata = test_data_z)
 #MSE 확인
-hyd_glm_pred <- hyd_glm_pred %>% 
-  cbind(train_data_z$Hyd_car) %>% 
+hyd_glm_pred_2020 <- hyd_glm_pred_2020 %>% 
+  cbind(test_data_z$Hyd_car) %>% 
   as.tibble()
-colnames(hyd_glm_pred) <- c('.pred', 'Hyd_car')
+colnames(hyd_glm_pred_2020) <- c('.pred', 'Hyd_car_z')
 
-mse_glm <- MSE(hyd_glm_pred$.pred, hyd_glm_pred$Hyd_car)
-
-y_mean <- mean(data_model$Hyd_car)
-y_std <- sqrt(var(data_model$Hyd_car))
-y_glm <- y_mean + hyd_glm_pred*y_std
-y_glm <- ceiling(y_glm) #올림처리
+y_mean <- mean(train_data$Hyd_car)
+y_std <- sqrt(var(train_data$Hyd_car))
+y_glm <- y_mean + hyd_glm_pred_2020*y_std
+glm_1 <- ceiling(y_glm) #올림처리
 
 ```
 
+```{r glm-mse-2}
+set.seed(2000)
+n <- sample(1:25, 17)
+train_data <- data_model[n,]
+test_data <- data_model[-n,]
+
+z_df = data.frame(1:17)
+df = train_data
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df)[i]
+}
+train_data_z <- z_df[,-1]
+
+
+z_df = data.frame(1:8)
+df2 = test_data
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df2[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df2)[i]
+}
+test_data_z <- z_df[,-1]
+hyd_glm_2000 <- stats::glm(Hyd_car~., data=train_data_z)
+
+#prediction
+hyd_glm_pred_2000 <- stats::predict(hyd_glm_2000, newdata = test_data_z)
+#MSE 확인
+hyd_glm_pred_2000 <- hyd_glm_pred_2000 %>% 
+  cbind(test_data_z$Hyd_car) %>% 
+  as.tibble()
+colnames(hyd_glm_pred_2000) <- c('.pred', 'Hyd_car_z')
+
+y_mean <- mean(train_data$Hyd_car)
+y_std <- sqrt(var(train_data$Hyd_car))
+y_glm <- y_mean + hyd_glm_pred_2000*y_std
+glm_2 <- ceiling(y_glm) #올림처리
+
+```
+
+```{r glm-mse 3}
+
+set.seed(1996)
+n <- sample(1:25, 17)
+train_data <- data_model[n,]
+test_data <- data_model[-n,]
+
+z_df = data.frame(1:17)
+df = train_data
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df)[i]
+}
+train_data_z <- z_df[,-1]
+
+
+z_df = data.frame(1:8)
+df2 = test_data
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df2[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df2)[i]
+}
+test_data_z <- z_df[,-1]
+hyd_glm_1996 <- stats::glm(Hyd_car~., data=train_data_z)
+
+#prediction
+hyd_glm_pred_1996 <- stats::predict(hyd_glm_1996, newdata = test_data_z)
+#MSE 확인
+hyd_glm_pred_1996 <- hyd_glm_pred_1996 %>% 
+  cbind(test_data_z$Hyd_car) %>% 
+  as.tibble()
+colnames(hyd_glm_pred_1996) <- c('.pred', 'Hyd_car_z')
+
+y_mean <- mean(train_data$Hyd_car)
+y_std <- sqrt(var(train_data$Hyd_car))
+y_glm <- y_mean + hyd_glm_pred_1996*y_std
+glm_3 <- ceiling(y_glm) #올림처리
+
+
+```
+
+
 ```{r echo = TRUE}
 
-MSE(y_glm$Hyd_car, y_glm$.pred)
+MSE(glm_1$Hyd_car, glm_1$.pred)
+
+MSE(glm_2$Hyd_car, glm_2$.pred)
+
+MSE(glm_3$Hyd_car, glm_3$.pred)
 
 ```
 
@@ -811,7 +982,7 @@ MSE(y_glm$Hyd_car, y_glm$.pred)
 > 최종 예측 모델 선정 <br> Linear Regression Model 성능 확인
 
 ```{r}
-knitr::kable(head(y_glm))
+knitr::kable(head(cbind(glm_1,glm_2,glm_3),10))
 
 ```
 
@@ -866,11 +1037,11 @@ summary(modFit_repeatedcv)$coefficients
 .pull-left[
 예시 1) 강동구 강일동에 설치된다면?
 
-Before: 원래 차량수
+real: 원래 차량수
 
-Before_pred: 차량수 예측(현재 기준)
+bef_hat: 차량수 예측(현재 기준)
 
-After_pred: 차량수 예측(새로운 충전소 가정)
+aft_hat: 차량수 예측(새로운 충전소 가정)
 
 ]
 
@@ -889,7 +1060,7 @@ loc_data <- car_v2 %>%
   select(idx, gu, dong ,lat, lng)
 
 #Edit here idx number
-new_gas <- loc_data[loc_data$idx ==150,]
+new_gas <- loc_data[loc_data$idx ==466,]
 
 data_dist <- data_new %>% 
   mutate(d3 = sqrt((lat - new_gas$lat)^2+
@@ -907,9 +1078,9 @@ data_simul <- data_new %>%
 # simulating by glm 
 # cross_validation_glm.R 돌리기
 simul_result <- data.frame(gu =car_gu$gu,
-                           before = data_simul$before_car,
-                           before_pred = round(predict(modFit_repeatedcv, data),3), 
-                           after_pred = round(predict(modFit_repeatedcv, data_simul),3))
+                           real = data_simul$before_car,
+                           bef_hat = round(predict(modFit_repeatedcv, data),3), 
+                           aft_hat = round(predict(modFit_repeatedcv, data_simul),3))
 
 head(simul_result,15)
 ```
@@ -921,13 +1092,14 @@ head(simul_result,15)
 .pull-left[
 Top 1: 강북구 미아동 설치시, 69대 증가
 
-**Dash board**
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%AF%B8%EC%95%84%EB%8F%99.png?raw=true" alt= "강북구 미아동" width = "300"/>
+
 
 ]
 
 .pull-right[
-Top 5
-```{r top5}
+Top 6
+```{r top6}
 #Top5 뽑을 준비
 N <- nrow(loc_data)
 pred_zip <- c()
@@ -969,7 +1141,7 @@ for (i in 1:N){
 }
 
 #Top5 산출
-a <- 0:4 #Top N 까지 산출하고 싶으면 0:(N-1)로 수정하기
+a <- 0:5 #Top N 까지 산출하고 싶으면 0:(N-1)로 수정하기
 idx <- data.frame(sapply(sort(pred_zip, index.return=TRUE), `[`, length(pred_zip)-a))$ix
 loc_data[idx,] %>% select(gu, dong)
 pred_zip[idx] - sum(simul_result[,2])
@@ -986,17 +1158,17 @@ class: inverse, middle, center
 ---
 ## 시각화 - Layout 기획
 
-- Tab 1. 구별 특성 그래프
+- [Tab 1] 구별 특성 그래프
  - Infobox로 최대값/중위값/최소값을 나타내는 구를 표시
  - ggplotly로 구 간의 특성을 한눈에 비교
 
-- Tab 2. 구별 특성 테이블
- - Tab 1.을 만드는데 사용한 데이터테이블을 interactive하게 표현.
+- [Tab 2] 구별 특성 테이블
+ - [Tab 1]을 만드는데 사용한 데이터테이블을 interactive하게 표현.
 
-- Tab 3. 구별 특성 지도
+- [Tab 3] 구별 특성 지도
  - Leaflet으로 구 간의 특성을 한눈에 비교(값에 따라 색상 변화)
 
-- Tab 4. 수소차 충전소 지도
+- [Tab 4] 수소차 충전소 지도
  - 동별로 수소차 충전소를 설치하였을 때의 수소차수의 예측 증가량을 지도와 테이블로 표현.
 
 ---
@@ -1032,38 +1204,58 @@ class: inverse, middle, center
 <br><br>=> reactive function으로 여러 번 코드를 다시 짜면서 해결
 
 ---
+## Shinydashboard 
+
+[
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC23.PNG?raw=true"/>
+](https://ysuks.shinyapps.io/dashboard/)
+
+---
 class: inverse, middle, center
 
 # 5. 최종 결과
 
 ---
-## 수소차 증가량이 가장 많은 충전소 입지 Top 5
 
-**Image**
+## 수소차 증가량 Top 6 충전소 입지
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%AF%B8%EC%95%84%EB%8F%99.png?raw=true" alt= "강남구 미아동" width = "250"/>
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EA%B8%B8%EC%9D%8C%EB%8F%99.png?raw=true" alt= "성북구 길음동" width = "250"/>
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%B2%88%EB%8F%99.png?raw=true" alt= "강북구 번동" width = "250"/>
+
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EC%A2%85%EC%95%94%EB%8F%99.png?raw=true" alt= "성북구 종암동" width = "250"/>
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EC%9E%A5%EC%9C%84%EB%8F%99.png?raw=true" alt= "성북구 장위동" width = "250"/>
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EB%85%B8%EC%9B%90%EA%B5%AC%20%EC%9B%94%EA%B3%84%EB%8F%99.png?raw=true" alt= "노원구 월계동" width = "250"/>
+
 
 ---
 ## 수소차 충전소 위치(2020년 6월 기준)
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EC%B6%A9%EC%A0%84%EC%86%8C.png?raw=true
----" alt= "충전소 위치" />
+---" alt= "충전소 위치" width = "700"/>
 
 
 ---
 ## 프로젝트를 진행하며 아쉬웠던 점
 
 .pull-left[
+등록된 수소차 수 부족으로 인한 모델링의 어려움
 
-- 등록된 수소차 수 부족으로 인한 모델링의 어려움
+<img src="https://littledeep.com/wp-content/uploads/2019/04/littledeep_illustration_car_style1.png" alt= "자동차" />
+
 ]
 
 .pull-right[
-- 동별 데이터 부족으로 충전소와의 거리 변수를 제외하고는 구별 데이터 위주의 사용
+동별 데이터에서 충전소와의 거리 변수를 제외하고는 구별 데이터 위주의 사용
+
+ <br> <br>
+<img src="https://img0.yna.co.kr/photo/cms/2019/04/23/04/PCM20190423000204990_P2.jpg" alt= "충전소" />
+
 ]
 
 ---
 ## 최종 전망
 
 .pull-left[
-<img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EA%B8%B0%EB%B0%98%20%EC%8B%9C%EC%84%A4.png?raw=true" alt= "수소차 기반 시설" width = "250"/>
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EA%B8%B0%EB%B0%98%20%EC%8B%9C%EC%84%A4.png?raw=true" alt= "수소차 기반 시설" width = "300"/>
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EA%B4%80%EB%A0%A8%EC%A3%BC.png?raw=true" alt= "수소차 관련주" width = "300"/>
 
 ]
@@ -1073,6 +1265,10 @@ class: inverse, middle, center
 ]
 
 
+---
+class: inverse, middle, center
+
+# THANK YOU
 
 
 
