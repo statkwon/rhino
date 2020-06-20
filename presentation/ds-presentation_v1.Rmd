@@ -77,7 +77,7 @@ class: center
 
 1. 충전소 입지 선정에 필요한 변수
 
-2. 수소차 확산dㅔ 중요한 변수
+2. 수소차 확산에 중요한 변수
 
 ---
 ## 시뮬레이션 
@@ -106,15 +106,261 @@ class: inverse, middle, center
 
 ---
 
+## 데이터 추출 및 전처리
+
+1) 충전소 관련
+
+
+2) 수소차 관련
+
+
+---
+
+## 데이터 추출 - part 1. 충전소 관련
+
+> 데이터 출처
+
+[서울 열린 데이터 광장](https://data.seoul.go.kr)
+: 자치구별 등록차량, 대학교, 기업체, 우통업체, 주차장
+
+
+[한국 감정원](http://www.r-one.co.kr/rone/resis/statistics/statisticsViewer.do?menuId=LFR_12200)
+: 공시지가 
+
+[교육 통계 서비스](https://kess.kedi.re.kr/mobile/search?searchTxt=%EC%84%9C%EC%9A%B8%EC%8B%9C%20%ED%96%89%EC%A0%95%EA%B5%AC%EC%97%AD%EB%B3%84%20%ED%95%99%EA%B5%90%EC%88%98)
+: 학교 수 
+
+
+
+---
+
+## 데이터 추출 - part 1. 충전소 관련
+> 데이터 종합
+
+.pull-left[
+```{r}
+library(tidyverse)
+gasstation <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/gasstation_imputation.csv")
+as.tibble(data.frame(col = colnames(gasstation), 
+           kor = c("자치구", "주유소 수", "등록차량 수", "차량 대비 주유소 수","유입교통량", "유출교통량",
+                   "공시지가", "대학교", "기업체", "유통업체", "주차장", "학교", "도로면적", "인구", "주간인구",
+                   "야간인구", "주유소 대비 차량 수")
+           ))
+```
+]
+.pull-right[
+
+<br><br><br>
+=> 주유소 대비 차량 수에 영향을 주는 변수를 확인하고자 함
+
+데이터는 자치구 단위로 처리됨
+
+]
+---
+## 데이터 전처리 - part 1. 충전소 관련
+
+>NA 확인
+
+.pull-left[
+```{r preprocessing-part1}
+library(ggplot2)
+
+gas <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/total_data.csv")
+
+
+#변수명 변경
+colnames(gas) <- c('gu', 'gas_station', 'car', 'station_per_car', 'inflow', 'outflow', 'land_value', 
+                   'university','enterprise', 'distributor', 'parking_area', 'school', 
+                   'road_area', 'population', 'day_pop', 'night_pop')
+
+#전처리 시작
+gas_tbl <- gas %>% as_tibble %>% 
+  janitor::clean_names()
+
+na_col <-apply(gas[,-1], 2, function(x){
+  sum(is.na(x))
+  }
+  )
+
+na_col[na_col!=0]
+
+#강북구 imputation (유일하게 inflow, outflow가 NA이다.)
+gas_tbl_lm <- gas_tbl %>% 
+  filter(gu != '강북구') %>% 
+  select(-gu)
+
+gas_tbl<- gas_tbl %>% 
+  mutate(car_per_station = car/gas_station)
+
+
+```
+]
+.pull-right[
+=> imputation이 필요한 변수들 
+]
+<br><br>
+road_area와 교통량(inflow, outflow)상관관계 높아서 유일변수로 회귀분석 실시
+
+```{r imputation, echo =TRUE}
+
+inflow.lm <- lm(inflow~road_area, data=gas_tbl_lm)
+
+outflow.lm <- lm(outflow~road_area, data=gas_tbl_lm)
+gas_tbl$inflow[3] <- predict(inflow.lm, newdata = gas_tbl 
+                             %>% filter(gu == '강북구') 
+                             %>% select(-gu))
+gas_tbl$outflow[3] <- predict(outflow.lm, newdata = gas_tbl 
+                              %>% filter(gu == '강북구') 
+                              %>% select(-gu))
+```
+
+
+---
+## 데이터 추출 - part 2. 수소차 관련
+> 데이터 출처
+
+- 서울시 근교 충전소좌표(정리).txt
+```{r}
+read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C%EC%9A%B8%EC%8B%9C_%EA%B7%BC%EA%B5%90_%EC%B6%A9%EC%A0%84%EC%86%8C%EC%A2%8C%ED%91%9C(%EC%A0%95%EB%A6%AC).txt")
+
+```
+
+- 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv
+
+- 서울시 자동차 등록현황(동별, 연료별)(20190430).xls
+
+- 서울시 자치구별 연령별 등록인구현황.csv
+
+---
+
+## 데이터 추출 - part 2. 수소차 관련
+> 데이터 종합
+
+- 법정동 기준 분류 
+
+```{r 법정동}
+car <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/data2(%EB%B2%95%EC%A0%95%EB%8F%99%EA%B8%B0%EC%A4%80).csv")
+
+dim(car)
+
+```
+
+
+- 행정동 기준 분류 
+
+```{r 행정동}
+pop <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/data2(%ED%96%89%EC%A0%95%EB%8F%99%20%EA%B8%B0%EC%A4%80).csv")
+
+dim(pop)
+
+```
+
+---
+## 데이터 전처리 - part 2. 수소차 관련
+- 법정동 데이터를 이용 : 더 많은 변수 사용을 위해 구 단위로 데이터 통합
+
+- 법정동 -> 자치구 단위
+
+```{r car_gu-1}
+station_locate <-as.factor(c("여의도", "양재", "상암", "하남"))
+colnames(car) <- c("gu", "dong", "car", "Hyd_car", 
+                   "dong_num", "dong_code", "dong_eng", 
+                   "lat", "lng","s_yeoui", "s_yangjae", "s_sangam", "s_hanam")
+
+# NA를 0으로 impute
+
+car$Hyd_car[is.na(car$Hyd_car)] <- 0
+
+#구별 차량 총 대수
+car_gu<- car %>% 
+  group_by(gu) %>% 
+  summarise_at(vars(ends_with("car")), funs(sum))
+
+dim(car)
+dim(car_gu)
+colnames(car_gu)
+```
+
+---
+## 데이터 전처리 - part 2. 수소차 관련
+
+- 자치구별 좌표, 서울시 근교 수소 충전소의 좌표 
+<br>=> 새로운 변수 생성
+
+- 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv 이용
+
+```{r car_gu-2}
+seoul_location <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C%EC%9A%B8%EC%8B%9C%20%ED%96%89%EC%A0%95%EA%B5%AC%EC%97%AD%20%EC%8B%9C%EA%B5%B0%EA%B5%AC%20%EC%A0%95%EB%B3%B4%20(%EC%A2%8C%ED%91%9C%EA%B3%84_%20WGS1984).csv")
+seoul_location <- seoul_location %>% 
+  select(시군구명_한글, 위도, 경도)
+
+colnames(seoul_location) <- c("gu", "lat", "lng")
+
+car_gu <- as.data.frame(car_gu)
+car_gu <- car_gu %>% 
+  left_join(seoul_location) 
+
+#충전소 좌표 데이터를 활용, 좌표 간 거리 계산
+hyd_location <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C%EC%9A%B8%EC%8B%9C_%EA%B7%BC%EA%B5%90_%EC%B6%A9%EC%A0%84%EC%86%8C%EC%A2%8C%ED%91%9C(%EC%A0%95%EB%A6%AC).txt")
+
+car_gu <-car_gu %>% 
+  mutate(s_yeoui = sqrt((lat - hyd_location[1,2])**2 + 
+                     (lng - hyd_location[1,3])**2 )) %>%
+  mutate(s_yangjae = sqrt((lat - hyd_location[2,2])**2 + 
+                     (lng - hyd_location[2,3])**2 )) %>%
+  mutate(s_sangam = sqrt((lat - hyd_location[3,2])**2 + 
+                     (lng - hyd_location[3,3])**2 )) %>%
+  mutate(s_hanam = sqrt((lat - hyd_location[4,2])**2 + 
+                     (lng - hyd_location[4,3])**2 )) 
+
+#rank화
+sort_gu <- t(apply(car_gu[,6:9],1,sort))
+colnames(sort_gu)  <- paste("r",(1:4) ,sep ="")
+car_gu <- cbind(car_gu,sort_gu)
+car_gu <- car_gu %>% 
+  mutate(r1_from = ifelse(r1 == s_yeoui, "여의도",
+                          ifelse(r1 == s_yangjae,"양재" ,
+                                 ifelse(r1==s_sangam,"상암","하남")))) %>% 
+  mutate(r2_from = ifelse(r2 == s_yeoui, "여의도",
+                          ifelse(r2 == s_yangjae,"양재" ,
+                                 ifelse(r2==s_sangam,"상암","하남"))))%>% 
+  mutate(r3_from = ifelse(r3 == s_yeoui, "여의도",
+                          ifelse(r3 == s_yangjae,"양재" ,
+                                 ifelse(r3==s_sangam,"상암","하남")))) %>% 
+  mutate(r4_from = ifelse(r4 == s_yeoui, "여의도",
+                          ifelse(r4 == s_yangjae,"양재" ,
+                                 ifelse(r4==s_sangam,"상암","하남")))) %>% 
+  select(-starts_with("s"))
+
+
+colnames(pop) <- c("gu", "dong", "pop", paste("X",seq(0,95, 5),seq(4,99, 5), sep = "_")
+, "X_100")
+
+pop_gu <-pop %>% 
+  group_by(gu) %>% 
+  summarise_at(vars(starts_with("X")), funs(sum))
+
+car_gu <- car_gu %>% 
+  left_join(pop_gu)
+```
+
+```{r echo=TRUE ,eval = TRUE}
+dim(car_gu)
+
+```
+
+### => 최종 데이터의 특징
+- 자치구 단위로 행의 수가 적음
+
+- 충전소와의 거리, 연령대 인구 등의 다양한 변수 포함
+
+
+
+---
 class: inverse, middle, center
 
 # 3. EDA 및 모델링
-```{r include = FALSE}
-library(ggplot2)
-library(tidyverse)
-gas_tbl <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/gasstation_imputation.csv")
 
-```
 ---
 ## EDA - 교통량
 ```{r 교통량, fig.height = 7, fig.width = 11}
@@ -309,8 +555,30 @@ class: center
 ]
 
 .pull-right[
-**PLOT**
+```{r Decision-tree}
+
+library(rpart)
+library(rpart.plot)
+library(pROC)
+library(tidyr)
+library(plotly)
+set.seed(522)
+
+gas <- gas_tbl %>% 
+  mutate_each(funs(scale(.)), -c('gu', 'gas_station','car','station_per_car')) %>% 
+  select(-c('gu', 'gas_station','car','station_per_car'))
+
+#Decision Tree
+my.control <- rpart.control(cp=0)
+gas_dt <- rpart(car_per_station ~ ., data=gas, method='anova', control=my.control)
+
+#Variable Importance
+vi_dt <- sort(gas_dt$variable.importance, decreasing=TRUE)
+barplot(vi_dt, las=2, col='skyblue')
+
+```
 ]
+
 ---
 ## 모델링 - part 1
 > 주유소 설치와 관련 있는 변수 찾기
@@ -329,7 +597,28 @@ class: center
 ]
 
 .pull-right[
-**PLOT**
+```{r bagging}
+library(caret)       
+library(ipred)   
+library(doParallel)
+library(foreach)
+library(vip)
+
+set.seed(123)
+
+gas_bag2 <- train(
+  car_per_station ~ .,
+  data = gas,
+  method = "treebag",
+  trControl = trainControl(method = "cv", number = 10),
+  nbagg = 200,  
+  control = rpart.control(minsplit = 2, cp = 0)
+)
+
+
+#Variable Importance
+vip(gas_bag2, num_features = 40, bar = FALSE)
+```
 ]
 ---
 ## 모델링 - part 1
@@ -348,7 +637,17 @@ class: center
 ]
 
 .pull-right[
-**PLOT**
+```{r random-forest}
+library(ranger)
+
+set.seed(522)
+gas_rf <- gas_tbl %>% 
+  select(-c('car_per_station','car','gas_station'))
+
+rfo <- ranger(station_per_car ~ ., data = gas_rf, importance = "impurity")
+vi_rfo <- sort(rfo$variable.importance, decreasing = T)
+barplot(vi_rfo, las = 2)
+```
 ]
 ---
 ## 모델링 - part 1
@@ -372,10 +671,26 @@ class: center
 .center[
 ### 가까운 거리에 수소충전소가 있으면<br> 수소차를 더 많이 살까?
 
-**CODE**
+```{r glm-coef}
+#데이터 가져오기
+car_dong <- read.csv('https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/car_v2.csv')
+raw_car_dong <- car_dong # 원본 자료 보존
+
+car_dong <- car_dong %>% 
+  dplyr::select(gu, dong, car, Hyd_car, r1, r2, r3, r4)
+
+#데이터 표준화(standardization)
+car_dong_z <- car_dong %>%
+  mutate_each(funs(z=scale(.)), -c('gu', 'dong')) %>% 
+  select(ends_with('z'))
+
+#GLM
+dong_glm2 <- glm(Hyd_car_z~.-car_z, data=car_dong_z)
+
+summary(dong_glm2)$coefficients
+```
 
 ### 그렇다  => 이 중에서는 r1, r2 두 개만 쓰도록 하자!
-
 ]
 ---
 ## 모델링 - part 3
@@ -385,7 +700,42 @@ class: center
 
 Decision Tree
 
-**CODE**
+```{r}
+data <- merge(car_gu, gas_tbl, by = 'gu')
+data <- data %>% 
+  select(-c('gu','r1_from','r2_from','r3_from','r4_from','lat','lng'))
+
+data_z <- data %>%
+  mutate_each(funs(z=scale(.))) %>% 
+  select(ends_with('z'))
+
+data_z <- round(data_z, 3)
+#colnames(data_z) <- substring(colnames(data_z),1,3)
+
+my.control <- rpart.control(cp=0)
+hyd_dt <- rpart(Hyd_car_z ~ ., data=data_z, method='anova', control=my.control)
+
+
+#prediction
+hyd_dt_pred <- predict(hyd_dt, newdata = data_z)
+
+#MSE 확인
+hyd_dt_pred <- hyd_dt_pred %>% 
+  cbind(data_z$Hyd_car_z) %>% 
+  as.tibble()
+colnames(hyd_dt_pred) <- c('.pred', 'Hyd_car_z')
+
+library("MLmetrics")
+mse_dt <- MSE(hyd_dt_pred$.pred, hyd_dt_pred$Hyd_car_z)
+
+y_mean <- mean(data$Hyd_car)
+y_std <- sqrt(var(data$Hyd_car))
+y_dt <- y_mean + hyd_dt_pred*y_std
+```
+
+```{r echo = TRUE}
+MSE(y_dt$Hyd_car_z, y_dt$.pred)
+```
 
 Train-Test Split 하지 않은 과적합모형인데도
 MSE 높다
@@ -397,7 +747,53 @@ MSE 높다
 Linear Regression
 
 
-**CODE**
+```{r}
+set.seed(2020)
+total_pop <- pop %>%
+  group_by(gu) %>%
+  summarise(total_pop = sum(pop))
+car_gu_model <- cbind(car_gu, total_pop[,2])
+
+data_model <- merge(car_gu_model, gas_tbl[,-3], by = 'gu')
+data_model <- data_model %>% 
+  select(c("Hyd_car","r1", "r2", "outflow", "land_value", "enterprise", "distributor") )
+
+z_df = data.frame(1:25)
+df = data_model
+for(i in 1:ncol(df)){
+  mean <- mean(df[,i])
+  sd <- sqrt(var(df[,i]))
+  z_col <- (df[,i]-mean)/sd
+  z_df <- data.frame(z_df, z_col)
+  colnames(z_df)[i+1] <- colnames(df)[i]
+}
+train_data_z <- z_df[,-1]
+
+hyd_glm <- glm(Hyd_car~., data=train_data_z)
+
+
+hyd_glm_pred <- predict(hyd_glm, newdata = train_data_z)
+
+#MSE 확인
+hyd_glm_pred <- hyd_glm_pred %>% 
+  cbind(train_data_z$Hyd_car) %>% 
+  as.tibble()
+colnames(hyd_glm_pred) <- c('.pred', 'Hyd_car')
+
+mse_glm <- MSE(hyd_glm_pred$.pred, hyd_glm_pred$Hyd_car)
+
+y_mean <- mean(data_model$Hyd_car)
+y_std <- sqrt(var(data_model$Hyd_car))
+y_glm <- y_mean + hyd_glm_pred*y_std
+y_glm <- ceiling(y_glm) #올림처리
+
+```
+
+```{r echo = TRUE}
+
+MSE(y_glm$Hyd_car, y_glm$.pred)
+
+```
 
 ]
 
@@ -405,7 +801,14 @@ Linear Regression
 ## 모델링 - part 3
 > 최종 예측 모델 선정 <br> Linear Regression Model 성능 확인
 
-**CODE**
+```{r}
+knitr::kable(head(y_glm))
+
+```
+
+.center[
+대체로 잘 예측하는 듯 하다.
+]
 
 ---
 ## 시뮬레이션
@@ -432,10 +835,18 @@ CV를 이용한 glm 모델 사용
 ## 시뮬레이션
 > OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
 
-**CODE**
+```{r simul-coef}
+ctrl <- trainControl(method="repeatedcv", number=10, repeats=5)
+modFit_repeatedcv <- train(Hyd_car ~., data=data_model, method="glm", trControl = ctrl)
+
+summary(modFit_repeatedcv)$coefficients
+
+```
 
 - 가장 가까운 수소충전소까지의 거리가 줄어들수록, 수소차 수 증가
+
 - 교통량이 많을수록, 수소차 수 증가
+
 - 사업체 수가 많을수록, 수소차 수 증가
 
 
@@ -447,14 +858,52 @@ CV를 이용한 glm 모델 사용
 예시 1) 강동구 강일동에 설치된다면?
 
 Before: 원래 차량수
+
 Before_pred: 차량수 예측(현재 기준)
+
 After_pred: 차량수 예측(새로운 충전소 가정)
 
 ]
 
 .pull-right[
-**CODE**
+```{r simulation-code}
+car_v2 <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/car_v2.csv")
+col_model <- colnames(data_model)
+data_new <- car_gu_model %>%
+  full_join(gas_tbl[,-3], by ="gu") %>%
+  select(all_of(col_model), lat, lng) %>% 
+  mutate(d1 = r1, d2 = r2, before_car = Hyd_car) %>% 
+  select(-c(r1,r2, Hyd_car))
 
+loc_data <- car_v2 %>% 
+  mutate(idx = row_number()) %>% 
+  select(idx, gu, dong ,lat, lng)
+
+#Edit here idx number
+new_gas <- loc_data[loc_data$idx ==150,]
+
+data_dist <- data_new %>% 
+  mutate(d3 = sqrt((lat - new_gas$lat)^2+
+                     (lng - new_gas$lng)^2)) %>%  
+  select(d1,d2,d3)
+
+r1 <- apply(data_dist, 1, min)
+r2 <- apply(data_dist, 1, median)
+
+#generate simulation data
+data_simul <- data_new %>% 
+  select(-c(d1,d2, lat, lng)) %>% 
+  data.frame( r1, r2)
+
+# simulating by glm 
+# cross_validation_glm.R 돌리기
+simul_result <- data.frame(gu =car_gu$gu,
+                           before = data_simul$before_car,
+                           before_pred = round(predict(modFit_repeatedcv, data),3), 
+                           after_pred = round(predict(modFit_repeatedcv, data_simul),3))
+
+head(simul_result,15)
+```
 ]
 ---
 ## 시뮬레이션
@@ -469,7 +918,53 @@ Top 1: 강북구 미아동 설치시, 69대 증가
 
 .pull-right[
 Top 5
-**CODE**
+```{r top5}
+#Top5 뽑을 준비
+N <- nrow(loc_data)
+pred_zip <- c()
+
+for (i in 1:N){
+  #Edit here idx number
+  new_gas <- loc_data[loc_data$idx ==i,]
+  new_gas
+  data_dist <- data_new %>% 
+    mutate(d3 = sqrt((lat - new_gas$lat)^2+
+                       (lng - new_gas$lng)^2)) %>%  
+    select(d1,d2,d3)
+  
+  r1 <- apply(data_dist, 1, min)
+  r2 <- apply(data_dist, 1, median)
+  
+  #generate simulation data
+  data_simul <- data_new %>% 
+    select(-c(d1,d2, lat, lng)) %>% 
+    data.frame( r1, r2)
+  
+  # simulating by glm 
+  # cross_validation_glm.R 돌리기
+  simul_result <- data.frame(gu =car_gu$gu,
+                             before = data_simul$before_car,
+                             before_pred = predict(modFit_repeatedcv, data), 
+                             after_pred = predict(modFit_repeatedcv, data_simul))
+  
+  #round and max after_pred
+  for (idx in 1:25){
+    simul_result[idx,4] <- max(simul_result[idx,2], round(simul_result[idx,4]))
+  }
+  
+  #compare before, after
+  #apply(simul_result[,2:4],2, sum) #before, after 모두 출력
+  
+  pred_zip[i] <- apply(simul_result[,2:4],2, sum)[3]
+  # pred_mat[i,2] <- apply(simul_result[,2:4],2, sum)[3]
+}
+
+#Top5 산출
+a <- 0:4 #Top N 까지 산출하고 싶으면 0:(N-1)로 수정하기
+idx <- data.frame(sapply(sort(pred_zip, index.return=TRUE), `[`, length(pred_zip)-a))$ix
+loc_data[idx,] %>% select(gu, dong)
+pred_zip[idx] - sum(simul_result[,2])
+```
 
 ]
 ---
@@ -568,7 +1063,6 @@ class: inverse, middle, center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%ED%9D%A5%ED%96%89.png?raw=true" alt= "수소차 흥행" />
 ]
 
----
 
 
 
