@@ -61,17 +61,17 @@ style_mono_light(base_color = "#23395b",
 class: inverse, middle, center
 
 # 1. 주제 선정 배경
+---
+## 수소(전기)차란 무엇인가
+
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
+
 
 ---
-## 수소차 전쟁 발발..
+## 수소차 전쟁 발발
 
 
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC2.png?raw=true" alt= "기사" />
-
----
-## 수소(전기)차란 무엇인가..
-
-<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
 
 
 ---
