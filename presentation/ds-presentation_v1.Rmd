@@ -63,20 +63,20 @@ class: inverse, middle, center
 # 1. 주제 선정 배경
 
 ---
-## 수소전기차 전쟁 발발
+## 수소차 전쟁 발발..
 
 
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC2.png?raw=true" alt= "기사" />
 
 ---
-## 수소차란 무엇인가
+## 수소(전기)차란 무엇인가..
 
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
 
 
 ---
 
-## 국내 현황
+## 국내 보급계획 및 현황
 .pull-left[
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC3.png?raw=true" alt= "국내 계획" />
 ]
@@ -90,11 +90,12 @@ class: inverse, middle, center
 class: center
 
 
-## 수소차 / 충전소
+## 수요가 먼저? 공급이 먼저?
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC5.png?raw=true" alt= "닭계란" />
 
 ---
-## 수요 / 공급
+## 공급이 수요를 낳는다
+### 충전소의 존재가 수소차 구매에 영향을 끼침
 
 .pull-left[
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC6.png?raw=true" alt= "보조금지급" />
@@ -104,7 +105,7 @@ class: center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC8.png?raw=true" alt= "서울시장" />
 ]
 
-### 서울시와의 협약을 통해 관심이 높아지는 중
+### 그에 따라 서울시는 현대자동차와 함께 2022년까지 수소충전소 설립 협약
 
 ---
 
@@ -115,9 +116,9 @@ class: center
 ---
 ## 시뮬레이션 
 
-충전소 위치가 수소차에 주는 영향을 이용 
+### 충전소 위치가 수소차에 주는 영향을 이용 
 
-서울시에서 어디에 충전소가 생기면 수소차가 더 많이 늘어날까?
+### 어디에 우선적으로 지어야 할까?
 
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC10.png?raw=true" alt= "충전소" />
 
