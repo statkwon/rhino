@@ -105,7 +105,7 @@ class: center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC8.png?raw=true" alt= "서울시장" />
 ]
 
-### 그에 따라 서울시는 현대자동차와 함께 2022년까지 수소충전소 설립 협약
+### 서울시는 현대자동차와 함께 2022년까지 수소충전소 15곳 이상 확충 협약
 
 ---
 
