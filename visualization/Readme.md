@@ -73,7 +73,7 @@ Tab3) 레이아웃 조정
 D.A.S.H. B.O.A.R.D. 완.성.
 https://ysuks.shinyapps.io/dashboard/
 
-Tab1) 구별 특성 그래프(ggplotly)
-Tab2) 구별 특성 테이블(table)
-Tab3) 구별 특성 지도(leaflet)
-Tab4) 수소차 충전소 지도(leaflet)
+<br>Tab1) 구별 특성 그래프(ggplotly)
+<br>Tab2) 구별 특성 테이블(table)
+<br>Tab3) 구별 특성 지도(leaflet)
+<br>Tab4) 수소차 충전소 지도(leaflet)
