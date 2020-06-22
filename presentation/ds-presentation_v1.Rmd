@@ -200,10 +200,16 @@ as.tibble(data.frame(col = colnames(gasstation),
 ```
 ]
 .pull-right[
-> 데이터 종합
+<br>
+<br>
+<br>
 
-<br><br><br>
-=> 주유소 대비 차량 수에 영향을 주는 변수를 확인하고자 함
+```{r data-gas-dim, echo=TRUE}
+dim(gasstation)
+
+```
+<br><br>
+주유소 대비 차량 수에 영향을 주는 변수를 확인하고자 함
 
 (데이터는 자치구 단위로 처리됨)
 
@@ -279,6 +285,9 @@ gas_tbl$outflow[3] <- predict(outflow.lm, newdata = gas_tbl
 read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C%EC%9A%B8%EC%8B%9C_%EA%B7%BC%EA%B5%90_%EC%B6%A9%EC%A0%84%EC%86%8C%EC%A2%8C%ED%91%9C(%EC%A0%95%EB%A6%AC).txt")
 
 ```
+<br>
+
+###[서울 열린 데이터 광장](https://data.seoul.go.kr)
 
 - 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv
 
@@ -293,20 +302,24 @@ read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C
 
 - 법정동 기준 분류 
 
-```{r 법정동}
+```{r car-pop, include= FALSE}
 car <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/data2(%EB%B2%95%EC%A0%95%EB%8F%99%EA%B8%B0%EC%A4%80).csv")
+pop <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/data2(%ED%96%89%EC%A0%95%EB%8F%99%20%EA%B8%B0%EC%A4%80).csv")
+```
 
+```{r 법정동, echo =TRUE}
 dim(car)
 
 ```
 => 법정동 기준으로 `r dim(car)[1]`개의 동
 
+<br>
+<br>
 
 
 - 행정동 기준 분류 
 
-```{r 행정동}
-pop <- read_csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/cleansing/data2(%ED%96%89%EC%A0%95%EB%8F%99%20%EA%B8%B0%EC%A4%80).csv")
+```{r 행정동, echo =TRUE}
 
 dim(pop)
 
@@ -315,11 +328,11 @@ dim(pop)
 
 ---
 ## 데이터 전처리 - part 2. 수소차 관련
-- 법정동 데이터를 이용 : 더 많은 변수 사용을 위해 구 단위로 데이터 통합
+- 더 많은 변수 사용을 위해 자치구 단위로 데이터 통합<br>=> 법정동 데이터를 이용 (Target이 법정동 기준으로 분류되어 있음)
 
 - 법정동 -> 자치구 단위
 
-```{r car_gu-1}
+```{r car_gu-1, include= FALSE}
 station_locate <-as.factor(c("여의도", "양재", "상암", "하남"))
 colnames(car) <- c("gu", "dong", "car", "Hyd_car", 
                    "dong_num", "dong_code", "dong_eng", 
@@ -333,19 +346,25 @@ car$Hyd_car[is.na(car$Hyd_car)] <- 0
 car_gu<- car %>% 
   group_by(gu) %>% 
   summarise_at(vars(ends_with("car")), funs(sum))
+```
 
+
+```{r car-gu-1-1, echo=TRUE}
 dim(car)
 dim(car_gu)
 colnames(car_gu)
 ```
 
+
+
 ---
 ## 데이터 전처리 - part 2. 수소차 관련
 
-- 자치구별 좌표, 서울시 근교 수소 충전소의 좌표 
+- 자치구별 좌표, 서울시 근교 수소 충전소의 좌표, 인구관련 데이터 
 <br>=> 새로운 변수 생성
 
 - 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv 이용
+
 
 ```{r car_gu-2}
 seoul_location <- read.csv("https://raw.githubusercontent.com/statkwon/rhino/master/data/%EC%84%9C%EC%9A%B8%EC%8B%9C%20%ED%96%89%EC%A0%95%EA%B5%AC%EC%97%AD%20%EC%8B%9C%EA%B5%B0%EA%B5%AC%20%EC%A0%95%EB%B3%B4%20(%EC%A2%8C%ED%91%9C%EA%B3%84_%20WGS1984).csv")
@@ -402,12 +421,15 @@ car_gu <- car_gu %>%
   left_join(pop_gu)
 ```
 
+
+### => 최종 데이터의 특징
+
 ```{r echo=TRUE ,eval = TRUE}
 dim(car_gu)
 
 ```
 
-### => 최종 데이터의 특징
+
 - 자치구 단위로 행의 수가 적음
 
 - 충전소와의 거리, 연령대 인구 등의 다양한 변수 포함
