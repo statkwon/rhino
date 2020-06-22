@@ -70,9 +70,10 @@ Tab3) 레이아웃 조정
 - Tab4)와 Tab5) 통합 및 테이블과 지도를 박스에 넣어서 레이아웃을 새롭게 배치.
 
 ------------------------------------------------------------------------------
-D.A.S.H. B.O.A.R.D. 완.성.
+<center>
+## D.A.S.H. B.O.A.R.D. 완.성.
 https://ysuks.shinyapps.io/dashboard/
-
+<\center>
 <br>Tab1) 구별 특성 그래프(ggplotly)
 <br>Tab2) 구별 특성 테이블(table)
 <br>Tab3) 구별 특성 지도(leaflet)
