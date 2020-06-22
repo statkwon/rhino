@@ -64,8 +64,12 @@ class: inverse, middle, center
 ---
 ## 수소(전기)차란 무엇인가
 
-<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
+<img src="https://github.com/statkwon/rhino/blob/master/fig/hydro.png?raw=true" alt= "수소차" />
 
+---
+## 대한민국의 수소자동차
+
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차구조" />
 
 ---
 ## 수소차 전쟁 발발
