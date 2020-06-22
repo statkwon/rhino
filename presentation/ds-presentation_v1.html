@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>2020 데이터사이언스 입문</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="팀 RHINO" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 2020 데이터사이언스 입문<br>
+## 서울시 수소차 확산에 관한 예측 <br><br>
+### 팀 RHINO
+### 2020년 6월 22일
+
+---
+
+
+
+background-image: url("https://i.pinimg.com/originals/4e/73/d4/4e73d4c90394a0040767af0fda11f0d6.jpg")
+class: center, middle, inverse
+
+
+
+
+
+
+
+
+
+# 팀 RHINO
+### 아프리카 초원의 코뿔소는 &lt;br&gt; 약간의 물만 마시고도 자동차만한 몸을 달린다. 
+
+이현탁, 이재상, 손지우, 서경덕, 정권상
+
+---
+
+## 0. 개요
+## 1. 주제 선정 배경
+## 2. 데이터 추출 및 전처리
+## 3. EDA 및 모델링
+## 4. 시각화 및 대쉬보드
+## 5. 최종 결과
+
+
+---
+class: inverse, middle, center
+
+# 1. 주제 선정 배경
+---
+
+## 수소(전기)차란 무엇인가
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/hydro.png?raw=true
+" alt= "수소차 구조" /&gt;
+
+
+---
+## 대한민국의 수소자동차
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" /&gt;
+
+
+---
+## 수소차 전쟁 발발
+
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC2.png?raw=true" alt= "기사" /&gt;
+
+
+---
+
+## 국내 보급계획 및 현황
+.pull-left[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC3.png?raw=true" alt= "국내 계획" /&gt;
+]
+
+.pull-right[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC9.png?raw=true" alt= "서울시 충전소 계획" /&gt;
+]
+
+---
+
+class: center
+
+
+## 수요가 먼저? 공급이 먼저?
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC5.png?raw=true" alt= "닭계란" /&gt;
+
+---
+## 공급이 수요를 낳는다
+### 충전소의 존재가 수소차 구매에 영향을 끼침
+
+.pull-left[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC6.png?raw=true" alt= "보조금지급" /&gt;
+]
+
+.pull-right[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC8.png?raw=true" alt= "서울시장" /&gt;
+]
+
+### 서울시는 현대자동차와 함께 2022년까지 수소충전소 15곳 이상 확충 협약
+
+---
+
+## 모델링
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC21.png?raw=true" alt= "충전소" /&gt;
+
+---
+## 시뮬레이션 
+
+### 충전소 위치가 수소차에 주는 영향을 이용 
+
+### 어디에 우선적으로 지어야 할까?
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC10.png?raw=true" alt= "충전소" /&gt;
+
+---
+## 대쉬보드
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC16.png?raw=true" alt= "대쉬보드" /&gt;
+
+---
+## 깃허브 페이지
+
+[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC19.PNG?raw=true" alt= "깃허브 페이지" /&gt; 
+](https://11aw1iet.github.io/rhino/)
+
+---
+
+## 블로그
+
+[&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC14.png?raw=true" alt= "블로그" /&gt;
+](https://rhinoblog.netlify.app/)
+
+---
+
+## 마크다운 PPT
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC20.PNG?raw=true" alt= "마크다운 ppt" /&gt; 
+
+
+---
+
+class: inverse, middle, center
+
+# 2. 데이터 추출 및 전처리
+
+---
+
+## 데이터 추출 및 전처리
+
+.pull-left[
+###1) 충전소 관련
+&lt;img src="https://www.h2news.kr/data/photos/20190727/art_15619717218451_de3eaf.jpg" alt= "충전소" /&gt; 
+
+]
+
+.pull-right[
+###2) 수소차 관련
+&lt;img src="https://img.hani.co.kr/imgdb/resize/2019/0118/53_1547803759_00502191_20190118.JPG" alt= "수소차" /&gt; 
+]
+
+---
+
+## 데이터 추출 - part 1. 충전소 관련
+
+&gt; 데이터 출처
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC22.PNG?raw=true" alt= "열린 데이터 광장" /&gt; 
+
+[서울 열린 데이터 광장](https://data.seoul.go.kr)
+: 자치구별 등록차량, 대학교, 기업체, 유통업체, 주차장 등등
+
+
+
+---
+
+## 데이터 추출 - part 1. 충전소 관련
+
+.pull-left[
+
+```
+# A tibble: 17 x 2
+   col             kor                
+   &lt;fct&gt;           &lt;fct&gt;              
+ 1 gu              자치구             
+ 2 gas_station     주유소 수          
+ 3 car             등록차량 수        
+ 4 station_per_car 차량 대비 주유소 수
+ 5 inflow          유입교통량         
+ 6 outflow         유출교통량         
+ 7 land_value      공시지가           
+ 8 university      대학교             
+ 9 enterprise      기업체             
+10 distributor     유통업체           
+11 parking_area    주차장             
+12 school          학교               
+13 road_area       도로면적           
+14 population      인구               
+15 day_pop         주간인구           
+16 night_pop       야간인구           
+17 car_per_station 주유소 대비 차량 수
+```
+]
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+```r
+&gt; dim(gasstation)
+```
+
+```
+[1] 25 17
+```
+&lt;br&gt;&lt;br&gt;
+주유소 대비 차량 수에 영향을 주는 변수를 확인하고자 함
+
+(데이터는 자치구 단위로 처리됨)
+
+]
+---
+## 데이터 전처리 - part 1. 충전소 관련
+
+&gt;NA 확인
+
+.pull-left[
+imputation이 필요한 변수들 :
+
+
+```
+ inflow outflow 
+      1       1 
+```
+
+]
+.pull-right[
+
+]
+&lt;br&gt;&lt;br&gt;
+road_area와 교통량(inflow, outflow)상관관계 높아서 유일변수로 회귀분석 실시
+
+
+```r
+&gt; inflow.lm &lt;- lm(inflow~road_area, data=gas_tbl_lm)
+&gt; 
+&gt; outflow.lm &lt;- lm(outflow~road_area, data=gas_tbl_lm)
+&gt; gas_tbl$inflow[3] &lt;- predict(inflow.lm, newdata = gas_tbl 
++                              %&gt;% filter(gu == '강북구') 
++                              %&gt;% select(-gu))
+&gt; gas_tbl$outflow[3] &lt;- predict(outflow.lm, newdata = gas_tbl 
++                               %&gt;% filter(gu == '강북구') 
++                               %&gt;% select(-gu))
+```
+
+
+---
+## 데이터 추출 - part 2. 수소차 관련
+&gt; 데이터 출처
+
+- 서울시 근교 충전소좌표(정리).txt
+
+```
+       loc      lat      lng
+1   Yeo-ui 37.53089 126.9151
+2 Yanj-jae 37.46887 127.0341
+3  Sang-am 37.57274 126.8799
+4   Ha-nam 37.53126 127.2084
+```
+&lt;br&gt;
+
+###[서울 열린 데이터 광장](https://data.seoul.go.kr)
+
+- 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv
+
+- 서울시 자동차 등록현황(동별, 연료별)(20190430).xls
+
+- 서울시 자치구별 연령별 등록인구현황.csv
+
+---
+
+## 데이터 추출 - part 2. 수소차 관련
+&gt; 데이터 종합
+
+- 법정동 기준 분류 
+
+
+
+
+```r
+&gt; dim(car)
+```
+
+```
+[1] 467  13
+```
+=&gt; 법정동 기준으로 467개의 동
+
+&lt;br&gt;
+&lt;br&gt;
+
+
+- 행정동 기준 분류 
+
+
+```r
+&gt; dim(pop)
+```
+
+```
+[1] 425  24
+```
+=&gt; 행정동 기준으로 425개의 동
+
+---
+## 데이터 전처리 - part 2. 수소차 관련
+- 더 많은 변수 사용을 위해 자치구 단위로 데이터 통합&lt;br&gt;=&gt; 법정동 데이터를 이용 (Target이 법정동 기준으로 분류되어 있음)
+
+- 법정동 -&gt; 자치구 단위
+
+
+
+
+
+```r
+&gt; dim(car)
+```
+
+```
+[1] 467  13
+```
+
+```r
+&gt; dim(car_gu)
+```
+
+```
+[1] 25  3
+```
+
+```r
+&gt; colnames(car_gu)
+```
+
+```
+[1] "gu"      "car"     "Hyd_car"
+```
+
+
+
+---
+## 데이터 전처리 - part 2. 수소차 관련
+
+- 자치구별 좌표, 서울시 근교 수소 충전소의 좌표, 인구관련 데이터 
+&lt;br&gt;=&gt; 새로운 변수 생성
+
+- 서울시 행정구역 시군구 정보 (좌표계_ WGS1984).csv 이용
+
+
+
+
+
+### =&gt; 최종 데이터의 특징
+
+
+```r
+&gt; dim(car_gu)
+```
+
+```
+[1] 25 34
+```
+
+
+- 자치구 단위로 행의 수가 적음
+
+- 충전소와의 거리, 연령대 인구 등의 다양한 변수 포함
+
+
+
+---
+class: inverse, middle, center
+
+# 3. EDA 및 모델링
+
+---
+## EDA - 교통량
+&lt;img src="ds-presentation_v1_files/figure-html/교통량-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## EDA - 기업 / 유통업체
+&lt;img src="ds-presentation_v1_files/figure-html/기업/유통업체 -1.png" style="display: block; margin: auto;" /&gt;
+---
+## EDA - 공시지가
+&lt;img src="ds-presentation_v1_files/figure-html/공시지가 -1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## EDA - 인구 관련
+&lt;img src="ds-presentation_v1_files/figure-html/인구관련-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## EDA - 학교
+&lt;img src="ds-presentation_v1_files/figure-html/학교 -1.png" style="display: block; margin: auto;" /&gt;
+---
+
+## EDA - 대학교
+&lt;img src="ds-presentation_v1_files/figure-html/대학교 -1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## EDA - 주유소 / 차량 대수
+&lt;img src="ds-presentation_v1_files/figure-html/타겟플랏 -1.png" style="display: block; margin: auto;" /&gt;
+---
+## EDA - 상관계수
+&lt;img src="ds-presentation_v1_files/figure-html/상관계수 -1.png" style="display: block; margin: auto;" /&gt;
+---
+## EDA - 교통량 변수 상관성
+&lt;img src="ds-presentation_v1_files/figure-html/교통량 상관계수 -1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: center
+## 모델링
+
+.pull-left[
+###[충전소 주인입장]
+
+- 특정 구에 충전소를 설치해도 되는가?
+1. 주유소 설치와 관련 있는 변수 찾기
+2. 수소충전소와 수소차 수 상관관계
+]
+
+.pull-right[
+###[수소차 주인입장]
+
+- 특정 구에 충전소가 설치된다면,&lt;br&gt; 수소차를 얼마나 더 살 것인가?
+
+]
+
+&lt;br&gt; &lt;br&gt;
+## **=&gt;  최종 예측 모델 선정**
+
+---
+## 모델링 - part 1
+&gt; 주유소 설치와 관련 있는 변수 찾기
+
+.pull-left[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EB%AA%A8%EB%8D%B8%EB%A7%81%20%EC%8B%9C%EB%8F%84.png?raw=truee" alt= "모델링 시도" /&gt;
+]
+
+.pull-right[
+다양한 분석기법 활용
+- Decision Tree
+- Bagging
+- Random Forest
+
+타겟변수의 관찰치 표준화&lt;br&gt;
+: 주유소 개수 당 자동차 대수
+]
+
+---
+## 모델링 - part 1
+&gt; 주유소 설치와 관련 있는 변수 찾기
+
+.pull-left[
+
+1) Decision Tree
+
+- inflow
+
+- outflow
+
+- enterprise
+
+- day_pop
+
+- distributor
+
+]
+
+.pull-right[
+&lt;img src="ds-presentation_v1_files/figure-html/Decision-tree-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 모델링 - part 1
+&gt; 주유소 설치와 관련 있는 변수 찾기
+
+.pull-left[
+
+2) Bagging
+
+- enterprise
+
+- inflow
+
+- land_value
+
+- outflow
+
+- university
+
+
+]
+
+.pull-right[
+&lt;img src="ds-presentation_v1_files/figure-html/bagging-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+## 모델링 - part 1
+&gt; 주유소 설치와 관련 있는 변수 찾기
+
+.pull-left[
+
+3) Random Forest
+
+- inflow
+
+- enterprise
+
+- outflow
+
+- university
+
+- distributor
+
+]
+
+.pull-right[
+&lt;img src="ds-presentation_v1_files/figure-html/random-forest-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+## 모델링 - part 1
+&gt; 주유소 설치와 관련 있는 변수 찾기
+
+.center[
+&lt;br&gt;
+### &lt;최종선택 중요변수&gt;
+### outflow&lt;br&gt;
+### land_value&lt;br&gt;
+### enterprise&lt;br&gt;
+### distributor
+
+
+]
+
+---
+## 모델링 - part 2
+&gt; 수소충전소와 수소차 수 상관관계
+
+.center[
+### 가까운 거리에 수소충전소가 있으면&lt;br&gt; 수소차를 더 많이 살까?
+
+
+```
+                 Estimate Std. Error       t value     Pr(&gt;|t|)
+(Intercept)  1.912900e-15 0.04172159  4.584917e-14 1.000000e+00
+r1_z        -5.907959e-01 0.06652879 -8.880304e+00 1.485614e-17
+r2_z         2.867752e-01 0.08391953  3.417265e+00 6.884749e-04
+r3_z         2.995418e-01 0.06182682  4.844851e+00 1.732372e-06
+r4_z        -3.211772e-01 0.07199146 -4.461324e+00 1.024275e-05
+```
+
+### 그렇다  =&gt; 이 중에서는 r1, r2 두 개만 쓰도록 하자!
+]
+---
+## 모델링 - part 3
+&gt; 최종 예측 모델 선정 
+
+.pull-left[
+
+Decision Tree
+
+
+
+
+```r
+&gt; MSE(y_dt$Hyd_car_z, y_dt$.pred)
+```
+
+```
+[1] 27.86282
+```
+
+Train-Test Split 하지 않은 과적합모형인데도
+MSE 높다
+
+
+]
+
+.pull-right[
+Linear Regression
+
+
+
+
+
+
+
+
+
+
+```r
+&gt; MSE(glm_1$Hyd_car, glm_1$.pred)
+```
+
+```
+[1] 13.5
+```
+
+```r
+&gt; MSE(glm_2$Hyd_car, glm_2$.pred)
+```
+
+```
+[1] 19.5
+```
+
+```r
+&gt; MSE(glm_3$Hyd_car, glm_3$.pred)
+```
+
+```
+[1] 3.375
+```
+
+]
+
+---
+## 모델링 - part 3
+&gt; 최종 예측 모델 선정 &lt;br&gt; Linear Regression Model 성능 확인
+
+
+```
+  .pred Hyd_car_z .pred Hyd_car_z .pred Hyd_car_z
+1     2         2    27        27    27        27
+2     2         4     9         3     1         2
+3     4         1     2         3     4         3
+4     2         3     3         4     7         6
+5     2         5     5         5     1         5
+6     5         5     6         3     5         5
+7    15         6     6         3     5         3
+8     6         4    16         6     7         9
+```
+
+.center[
+대체로 잘 예측하는 듯 하다.
+]
+
+---
+## 시뮬레이션
+&gt; OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
+
+.pull-left[
+1) 새로운 충전소가 추가되었을 때,&lt;br&gt;
+가까운 충전소 거리 업데이트
+
+r1 &amp; r2 update
+
+r1: 가장 가까운 수소충전소까지의 거리
+r2: 두번째로 가까운 수소충전소까지의 거리
+
+]
+
+.pull-right[
+2) 각 행정동 별로 수소차 변동 예측
+
+CV를 이용한 glm 모델 사용
+
+]
+---
+## 시뮬레이션
+&gt; OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
+
+
+```
+                 Estimate   Std. Error   t value     Pr(&gt;|t|)
+(Intercept)  8.091993e+01 3.964557e+01  2.041084 0.0561840987
+r1          -8.219863e+01 2.675578e+01 -3.072182 0.0065666907
+r2           8.159683e+01 2.580729e+01  3.161774 0.0053971128
+outflow      8.916467e-08 2.246516e-08  3.969020 0.0008998303
+land_value  -7.586516e-01 3.374179e-01 -2.248404 0.0373146127
+enterprise   2.392243e-04 8.001284e-05  2.989824 0.0078573256
+distributor -1.679802e-05 5.318483e-06 -3.158423 0.0054369468
+```
+
+- 가장 가까운 수소충전소까지의 거리가 줄어들수록, 수소차 수 증가
+
+- 교통량이 많을수록, 수소차 수 증가
+
+- 사업체 수가 많을수록, 수소차 수 증가
+
+
+---
+## 시뮬레이션
+&gt; OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
+
+.pull-left[
+예시 1) 강동구 상일동에 설치된다면?
+
+real: 원래 차량수
+
+bef_hat: 차량수 예측(현재 기준)
+
+aft_hat: 차량수 예측(새로운 충전소 가정)
+
+]
+
+.pull-right[
+
+```
+         gu real bef_hat aft_hat
+1    강남구   27  26.254  23.869
+2    강동구    3   7.282   4.644
+3    강북구    2   0.962   0.962
+4    강서구    4   4.108   4.108
+5    관악구    2   2.479   2.479
+6    광진구    2   1.424  -0.100
+7    구로구    4   2.245   2.245
+8    금천구    1   4.844   4.844
+9    노원구    1   3.223   5.711
+10   도봉구    2   0.734   0.734
+11 동대문구    3   2.234   0.450
+12   동작구    3   3.395   3.395
+13   마포구    6   7.304   7.304
+14 서대문구    5   1.582   1.582
+15   서초구   28  23.225  23.225
+```
+]
+---
+## 시뮬레이션
+&gt; OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
+
+.pull-left[
+Top 1: 강북구 미아동 설치시, 69대 증가
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%AF%B8%EC%95%84%EB%8F%99.png?raw=true" alt= "강북구 미아동" width = "300"/&gt;
+
+
+]
+
+.pull-right[
+Top 6
+
+```
+        gu     dong
+277 강북구   미아동
+271 성북구   길음동
+278 강북구     번동
+285 노원구   월계동
+275 성북구   장위동
+273 성북구 하월곡동
+```
+
+```
+[1] 69 69 68 67 67 67
+```
+
+]
+---
+
+
+class: inverse, middle, center
+
+# 4. 시각화 및 대쉬보드
+
+---
+## 시각화 - Layout 기획
+
+- [Tab 1] 구별 특성 그래프
+ - Infobox로 최대값/중위값/최소값을 나타내는 구를 표시
+ - ggplotly로 구 간의 특성을 한눈에 비교
+
+- [Tab 2] 구별 특성 테이블
+ - [Tab 1]을 만드는데 사용한 데이터테이블을 interactive하게 표현.
+
+- [Tab 3] 구별 특성 지도
+ - Leaflet으로 구 간의 특성을 한눈에 비교(값에 따라 색상 변화)
+
+- [Tab 4] 수소차 충전소 지도
+ - 동별로 수소차 충전소를 설치하였을 때의 수소차수의 예측 증가량을 지도와 테이블로 표현.
+
+---
+
+## 시각화 - 구현방법
+&gt; R : shinydashboard, leaflet 이용
+
+### 1) Leaflet으로 서울시내 구별 경계구분도 그리기
+
+행정구역도 데이터(shp파일)를 다운하여 좌표계 leaflet의 polygon기능이용. SHP파일은 GRS80좌표계 기준이라 Leaflet기준 WGS84 좌표계로 변환하였다.
+
+[참고 블로그](https://statkwon.netlify.app/2020/06/15/leaflet을-이용한-서울시-interactive-map-제작/)
+
+### 2) Shinydashboard 이용 
+코드트레이닝 – 데이터캠프 및 구글 이용
+
+수차례의 팀회의를 통하여 레이아웃 결정 및 코드 오류 해결 
+
+---
+
+## 시각화 - Issue
+
+- 1) 사이즈변환문제(각 pc환경에 따라 plot사이즈가 다르게 나옴)
+ &lt;br&gt;&lt;br&gt;=&gt; css를 이용한 상대적 사이즈 이용 및 plotly이용
+
+- 2) shinydashboard에서 여러 개의 tab에 select input이 들어가는 경우 오류 발생
+ &lt;br&gt;&lt;br&gt;=&gt; dashboard자체 문제, selectinput 타입 조정
+
+- 3) 다중 selectinput을 탭에 삽입하는 문제
+&lt;br&gt;&lt;br&gt;=&gt; 각 input을 서버에서 처리해서 해결. 하지만 로딩시간이 발생, 로딩동안 지도와 테이블에 input이 선택되지 않았다고 뜸. 
+
+- 4) selectinput 클릭 시에 테이블과 지도를 변경하는 문제
+&lt;br&gt;&lt;br&gt;=&gt; reactive function으로 여러 번 코드를 다시 짜면서 해결
+
+---
+## Shinydashboard 
+
+[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC23.PNG?raw=true"/&gt;
+](https://ysuks.shinyapps.io/dashboard/)
+
+---
+class: inverse, middle, center
+
+# 5. 최종 결과
+
+---
+
+## 수소차 증가량 Top 6 충전소 입지
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%AF%B8%EC%95%84%EB%8F%99.png?raw=true" alt= "강남구 미아동" width = "250"/&gt;
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EA%B8%B8%EC%9D%8C%EB%8F%99.png?raw=true" alt= "성북구 길음동" width = "250"/&gt;
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%B2%88%EB%8F%99.png?raw=true" alt= "강북구 번동" width = "250"/&gt;
+
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EC%A2%85%EC%95%94%EB%8F%99.png?raw=true" alt= "성북구 종암동" width = "250"/&gt;
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EC%9E%A5%EC%9C%84%EB%8F%99.png?raw=true" alt= "성북구 장위동" width = "250"/&gt;
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EB%85%B8%EC%9B%90%EA%B5%AC%20%EC%9B%94%EA%B3%84%EB%8F%99.png?raw=true" alt= "노원구 월계동" width = "250"/&gt;
+
+
+---
+## 수소차 충전소 위치(2020년 6월 기준)
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EC%B6%A9%EC%A0%84%EC%86%8C.png?raw=true
+---" alt= "충전소 위치" width = "700"/&gt;
+
+
+---
+## 프로젝트를 진행하며 아쉬웠던 점
+
+.pull-left[
+등록된 수소차 수 부족으로 인한 모델링의 어려움
+
+&lt;img src="https://littledeep.com/wp-content/uploads/2019/04/littledeep_illustration_car_style1.png" alt= "자동차" /&gt;
+
+]
+
+.pull-right[
+동별 데이터에서 충전소와의 거리 변수를 제외하고는 구별 데이터 위주의 사용
+
+ &lt;br&gt; &lt;br&gt;
+&lt;img src="https://img0.yna.co.kr/photo/cms/2019/04/23/04/PCM20190423000204990_P2.jpg" alt= "충전소" /&gt;
+
+]
+
+---
+## 최종 전망
+
+.pull-left[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EA%B8%B0%EB%B0%98%20%EC%8B%9C%EC%84%A4.png?raw=true" alt= "수소차 기반 시설" width = "300"/&gt;
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%EA%B4%80%EB%A0%A8%EC%A3%BC.png?raw=true" alt= "수소차 관련주" width = "300"/&gt;
+
+]
+
+.pull-right[
+&lt;img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%ED%9D%A5%ED%96%89.png?raw=true" alt= "수소차 흥행" /&gt;
+]
+
+---
+## 참고문헌
+- 빅데이터 표준분석모델을 활용한 전기차 충전 인프라 우선설치지역 도출 사례연구
+- 경기도의 수소차 보급 활성화를 위한 충전인프라 구축방안 연구
+- 수소연료전지 자동차(FCEV) 충전용 수소 시장조성을 위한 정책연구
+- AHP를 활용한 주유소 입지 결정 요인에 관한 연구
+- GIS를 활용한 대전시 주유소 입지와 판매권역 분석
+- 서울시 최적의 전기자동차 충전소 위치 선정
+- 전기차충전 인프라확장방안
+- 전기차 급속 충전소 입지 추천
+- 수소 생산, 수송 방법 및 수송거리에 따른 경제성 분석
+- 국내 수소전기차 및 수소충전소 보급 동향
+- 수소충전소 기술 및 정책 현황
+- 창원시 수소버스 운행에 따른 수소소비 현황 및 보급 활성화 방안
+
+
+그 외 github에 reference폴더에 있다.
+
+=&gt; [github 링크](https://github.com/statkwon/rhino)
+
+---
+class: inverse, middle, center
+
+# THANK YOU
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
