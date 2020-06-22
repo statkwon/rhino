@@ -62,14 +62,17 @@ class: inverse, middle, center
 
 # 1. 주제 선정 배경
 ---
-## 수소(전기)차란 무엇인가
 
-<img src="https://github.com/statkwon/rhino/blob/master/fig/hydro.png?raw=true" alt= "수소차" />
+## 수소(전기)차란 무엇인가
+<img src="https://github.com/statkwon/rhino/blob/master/fig/hydro.png?raw=true
+" alt= "수소차 구조" />
+
 
 ---
 ## 대한민국의 수소자동차
 
-<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차구조" />
+<img src="https://github.com/statkwon/rhino/blob/master/fig/%EA%B7%B8%EB%A6%BC4.png?raw=true" alt= "수소차" />
+
 
 ---
 ## 수소차 전쟁 발발
@@ -590,7 +593,7 @@ class: center
 ###[충전소 주인입장]
 
 - 특정 구에 충전소를 설치해도 되는가?
-1. 주유소 설치와 관련 잇는 변수 찾기
+1. 주유소 설치와 관련 있는 변수 찾기
 2. 수소충전소와 수소차 수 상관관계
 ]
 
@@ -602,7 +605,7 @@ class: center
 ]
 
 <br> <br>
-## **=> 3. 최종 예측 모델 선정**
+## **=>  최종 예측 모델 선정**
 
 ---
 ## 모델링 - part 1
@@ -1009,7 +1012,7 @@ MSE(glm_3$Hyd_car, glm_3$.pred)
 > 최종 예측 모델 선정 <br> Linear Regression Model 성능 확인
 
 ```{r}
-knitr::kable(head(cbind(glm_1,glm_2,glm_3),10))
+head(cbind(glm_1,glm_2,glm_3),10)
 
 ```
 
@@ -1062,7 +1065,7 @@ summary(modFit_repeatedcv)$coefficients
 > OO구 OO동에 수소충전소를 설치한다면 수소차는 얼마나 늘어날까?
 
 .pull-left[
-예시 1) 강동구 강일동에 설치된다면?
+예시 1) 강동구 상일동에 설치된다면?
 
 real: 원래 차량수
 
@@ -1087,7 +1090,7 @@ loc_data <- car_v2 %>%
   select(idx, gu, dong ,lat, lng)
 
 #Edit here idx number
-new_gas <- loc_data[loc_data$idx ==466,]
+new_gas <- loc_data[loc_data$idx ==461,]
 
 data_dist <- data_new %>% 
   mutate(d3 = sqrt((lat - new_gas$lat)^2+
@@ -1291,6 +1294,25 @@ class: inverse, middle, center
 <img src="https://github.com/statkwon/rhino/blob/master/fig/%EC%88%98%EC%86%8C%EC%B0%A8%20%ED%9D%A5%ED%96%89.png?raw=true" alt= "수소차 흥행" />
 ]
 
+---
+## 참고문헌
+- 빅데이터 표준분석모델을 활용한 전기차 충전 인프라 우선설치지역 도출 사례연구
+- 경기도의 수소차 보급 활성화를 위한 충전인프라 구축방안 연구
+- 수소연료전지 자동차(FCEV) 충전용 수소 시장조성을 위한 정책연구
+- AHP를 활용한 주유소 입지 결정 요인에 관한 연구
+- GIS를 활용한 대전시 주유소 입지와 판매권역 분석
+- 서울시 최적의 전기자동차 충전소 위치 선정
+- 전기차충전 인프라확장방안
+- 전기차 급속 충전소 입지 추천
+- 수소 생산, 수송 방법 및 수송거리에 따른 경제성 분석
+- 국내 수소전기차 및 수소충전소 보급 동향
+- 수소충전소 기술 및 정책 현황
+- 창원시 수소버스 운행에 따른 수소소비 현황 및 보급 활성화 방안
+
+
+그 외 github에 reference폴더에 있다.
+
+=> [github 링크](https://github.com/statkwon/rhino)
 
 ---
 class: inverse, middle, center
